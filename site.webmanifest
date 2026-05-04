@@ -1,0 +1,13 @@
+{
+  "name": "Design Build & Renovate LLC",
+  "short_name": "DBR",
+  "description": "Custom carpentry and finish work for Metro Detroit homes.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#efe6b8",
+  "theme_color": "#1a1410",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

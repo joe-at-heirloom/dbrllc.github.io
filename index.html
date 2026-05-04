@@ -23,6 +23,9 @@
 <meta name="twitter:image" content="https://designbuildrenovate.com/og-image.jpg" />
 <meta name="theme-color" content="#1a1410" />
 <link rel="icon" type="image/svg+xml" href="logo.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
 
 <!-- ─────────────────────────  STRUCTURED DATA  ───────────────────────── -->
 <script type="application/ld+json">
@@ -232,9 +235,9 @@
     display: inline-block;
     padding-bottom: 2px;
     border-bottom: 1.5px solid currentColor;
-    transition: opacity 0.2s ease;
+    transition: color 0.2s ease, border-color 0.2s ease;
   }
-  .link-underline:hover { opacity: 0.65; }
+  .link-underline:hover { color: var(--wood); border-color: var(--wood); }
   .skip-link { position: absolute; left: -9999px; top: 0; }
   .skip-link:focus {
     position: fixed; left: 0.75rem; top: 0.75rem; z-index: 100;
@@ -1659,7 +1662,11 @@
       <div class="row">
         <div>
           <img src="wordmark.svg" alt="Design Build & Renovate LLC" class="invert" style="height:clamp(2rem, 4.5vw, 3rem);width:auto;display:block;" />
-          <p class="display-lg signoff">One craftsman.<br/>Every cut.</p>
+          <p class="display-lg signoff" style="display:flex; flex-wrap:wrap; align-items:center; gap:0.5em 0.75em;">
+            <span>One craftsman.</span>
+            <img src="logo.svg" alt="" aria-hidden="true" class="invert" style="height:0.75em;width:auto;opacity:0.7;flex-shrink:0;" />
+            <span>Every cut.</span>
+          </p>
         </div>
         <div class="right">
           <img src="logo.svg" alt="" aria-hidden="true" class="invert" style="height:5rem;width:auto;margin-bottom:1.5rem;" />
