@@ -1,0 +1,21 @@
+# Working files (not deployed)
+site/
+Photos/
+*.docx
+*.pages
+*.numbers
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (in case anyone runs the legacy site/ project)
+node_modules/
+dist/
+.astro/

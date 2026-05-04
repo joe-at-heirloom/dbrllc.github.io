@@ -1,0 +1,1404 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Design Build &amp; Renovate — Custom Carpentry, Metro Detroit</title>
+<meta name="description" content="Custom carpentry and finish work for Metro Detroit homes. Ian O'Ray, St. Clair Shores." />
+<!-- TODO_IAN: Domain not finalized — using designbuildrenovate.com in metadata as default -->
+<link rel="canonical" href="https://designbuildrenovate.com/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Design Build & Renovate — Custom Carpentry, Metro Detroit" />
+<meta property="og:description" content="Custom carpentry and finish work for Metro Detroit homes. Ian O'Ray, St. Clair Shores." />
+<meta property="og:url" content="https://designbuildrenovate.com/" />
+<meta property="og:site_name" content="Design Build & Renovate LLC" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" type="image/svg+xml" href="logo.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=JetBrains+Mono:wght@400;500&display=swap"
+/>
+
+<style>
+  /* ─────────────────────────  TOKENS — quartersawn oak, walnut, cream  ───────────────────────── */
+  :root {
+    /* Cream pulled from logo, slightly warmed; dark walnut instead of pure black */
+    --paper:        #efe6b8;   /* primary cream — saturated honey-cream */
+    --paper-soft:   #f5edc8;   /* lighter cream for breathing bands */
+    --paper-deep:   #d8c98c;   /* honey-oat banding */
+    --ink:          #1a1410;   /* deep walnut, not pure black */
+    --ink-soft:     #2c2419;
+    --ink-muted:    #5a4a35;
+    --rule:         #1a1410;
+    --wood:         #8b5a2b;   /* quartersawn oak / chestnut accent */
+    --wood-deep:    #5a3a1c;
+
+    --serif:   "Bitter", Georgia, "Times New Roman", serif;
+    --mono:    "JetBrains Mono", ui-monospace, "SF Mono", monospace;
+
+    --container: 1320px;
+    --gut-x: clamp(1.5rem, 4vw, 3.5rem);
+  }
+
+  /* ─────────────────────────  RESET  ───────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  img, svg { display: block; max-width: 100%; height: auto; }
+  a { color: inherit; text-decoration: none; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  button { font: inherit; background: none; border: 0; padding: 0; color: inherit; cursor: pointer; }
+  ::selection { background: var(--ink); color: var(--paper); }
+  p { margin: 0; }
+
+  /* ─────────────────────────  TYPE  ───────────────────────── */
+  .display {
+    font-family: var(--serif);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.08;
+    margin: 0;
+  }
+  .display-lg {
+    font-family: var(--serif);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    margin: 0;
+  }
+  .eyebrow {
+    font-family: var(--serif);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    margin: 0;
+  }
+  .sheet-num {
+    font-family: var(--mono);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-muted);
+    font-size: 0.7rem;
+  }
+
+  /* ─────────────────────────  PRIMITIVES  ───────────────────────── */
+  .container {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding-left: var(--gut-x);
+    padding-right: var(--gut-x);
+  }
+  .rule { height: 2px; background: var(--ink); width: 100%; }
+  .link-underline {
+    display: inline-block;
+    padding-bottom: 2px;
+    border-bottom: 1.5px solid currentColor;
+    transition: opacity 0.2s ease;
+  }
+  .link-underline:hover { opacity: 0.65; }
+  .skip-link { position: absolute; left: -9999px; top: 0; }
+  .skip-link:focus {
+    position: fixed; left: 0.5rem; top: 0.5rem; z-index: 100;
+    background: var(--ink); color: var(--paper); padding: 0.5rem 0.75rem;
+  }
+  .invert { filter: invert(1) brightness(1.05) sepia(0.15); }
+
+  /* Architectural registration marks — corner ticks like a blueprint sheet */
+  .reg {
+    position: relative;
+  }
+  .reg::before, .reg::after,
+  .reg > .reg-bl, .reg > .reg-br {
+    content: ""; position: absolute;
+    width: 14px; height: 14px;
+    pointer-events: none;
+    background:
+      linear-gradient(currentColor, currentColor) left top   / 100% 1.5px no-repeat,
+      linear-gradient(currentColor, currentColor) left top   / 1.5px 100% no-repeat;
+    color: var(--ink);
+  }
+  .reg::before { top: -2px; left: -2px; }
+  .reg::after  { top: -2px; right: -2px; transform: scaleX(-1); }
+  .reg > .reg-bl, .reg > .reg-br { display: block; }
+  .reg > .reg-bl { bottom: -2px; left: -2px;  transform: scaleY(-1); }
+  .reg > .reg-br { bottom: -2px; right: -2px; transform: scale(-1, -1); }
+  .reg.on-dark::before, .reg.on-dark::after,
+  .reg.on-dark > .reg-bl, .reg.on-dark > .reg-br { color: var(--paper); }
+
+  /* ─────────────────────────  NAV  ───────────────────────── */
+  header.site {
+    position: absolute; top: 0; left: 0; right: 0;
+    z-index: 30; color: var(--paper);
+  }
+  header.site .bar {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 0;
+    border-bottom: 2px solid rgba(239, 230, 184, 0.25);
+  }
+  header.site.solid { color: var(--ink); }
+  header.site.solid .bar { border-bottom-color: rgba(26, 20, 16, 0.3); }
+  .brand { display: inline-flex; align-items: center; gap: 0.85rem; }
+  .brand .mark { height: 2.5rem; width: auto; }
+  .brand .wordmark { height: 0.8rem; width: auto; display: block; }
+  /* On the dark hero: logo tints to honey-wood, wordmark to cream */
+  header.site:not(.solid) .brand .mark {
+    filter: invert(1) sepia(1) saturate(2.4) hue-rotate(-12deg) brightness(0.92) contrast(1.05);
+  }
+  header.site:not(.solid) .brand .wordmark {
+    filter: invert(1) brightness(1.08) sepia(0.12);
+  }
+  /* On light bg: walnut, no filter needed (SVG renders black) */
+  header.site.solid .brand .mark,
+  header.site.solid .brand .wordmark { filter: none; }
+  .brand .meta {
+    display: block; margin-top: 0.55rem;
+    font-family: var(--mono);
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(239, 230, 184, 0.7);
+  }
+  header.site.solid .brand .meta { color: var(--ink-muted); }
+
+  nav.primary { display: none; align-items: center; gap: 1.75rem; }
+  nav.primary a {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(239, 230, 184, 0.8); transition: color 0.2s;
+  }
+  nav.primary a:hover { color: var(--paper); }
+  header.site.solid nav.primary a { color: var(--ink-muted); }
+  header.site.solid nav.primary a:hover { color: var(--ink); }
+  nav.primary .phone {
+    border: 1.5px solid rgba(239, 230, 184, 0.45);
+    padding: 0.65rem 1.1rem;
+    color: var(--paper);
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+  nav.primary .phone:hover { border-color: var(--paper); }
+  header.site.solid nav.primary .phone {
+    border-color: rgba(26, 20, 16, 0.45); color: var(--ink);
+  }
+  header.site.solid nav.primary .phone:hover { border-color: var(--ink); }
+
+  .menu-toggle { padding: 0.5rem; margin-right: -0.5rem; display: block; }
+  .menu-toggle svg line { stroke: currentColor; stroke-width: 2; }
+
+  #mobile-menu {
+    display: none;
+    position: fixed; inset: 0; z-index: 40;
+    background: var(--paper); color: var(--ink);
+  }
+  #mobile-menu.open { display: block; }
+  #mobile-menu .top {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem var(--gut-x); border-bottom: 2px solid var(--ink);
+  }
+  #mobile-menu nav {
+    display: flex; flex-direction: column; gap: 1.75rem;
+    padding: 2.5rem var(--gut-x);
+  }
+  #mobile-menu nav a { display: flex; align-items: baseline; gap: 1.25rem; color: var(--ink); }
+  #mobile-menu nav a .display { font-size: 2.25rem; }
+  #mobile-menu nav .divider { height: 2px; background: var(--ink); margin: 1rem 0; }
+
+  @media (min-width: 880px) {
+    nav.primary { display: flex; }
+    .menu-toggle { display: none; }
+    .brand .mark { height: 3rem; }
+    .brand .wordmark { height: 0.9rem; }
+  }
+
+  /* ─────────────────────────  HERO  ───────────────────────── */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .hero .bg, .hero .scrim { position: absolute; inset: 0; }
+  .hero .bg img {
+    width: 100%; height: 100%; object-fit: cover; opacity: 0.55;
+    filter: sepia(0.18) saturate(1.05);
+  }
+  .hero .scrim {
+    background: linear-gradient(180deg, rgba(26,20,16,0.65) 0%, rgba(26,20,16,0.3) 50%, rgba(26,20,16,0.9) 100%);
+  }
+  .hero .inner {
+    position: relative; z-index: 10;
+    min-height: 100svh;
+    padding-top: 8.5rem; padding-bottom: 4rem;
+    display: flex; flex-direction: column;
+  }
+  .hero .sheet-meta {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    border-bottom: 1px solid rgba(239, 230, 184, 0.25);
+    padding-bottom: 1rem;
+  }
+  .hero .sheet-meta .sheet-num { color: rgba(239, 230, 184, 0.7); }
+  .hero h1 {
+    font-size: clamp(2.125rem, 5.75vw, 5.5rem);
+    margin: 1.25rem 0 0; max-width: 1000px;
+  }
+  .hero .lede {
+    margin-top: 1.75rem; max-width: 38rem;
+    font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); line-height: 1.65;
+    color: rgba(239, 230, 184, 0.92);
+    font-weight: 400;
+  }
+  .hero .body-block { margin-top: 3rem; }
+  @media (min-width: 880px) { .hero .body-block { margin-top: 5rem; } }
+  .hero .foot {
+    margin-top: auto; padding-top: 4rem;
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem; align-items: end;
+  }
+  .hero .foot .links {
+    display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
+    font-size: 0.875rem; font-weight: 500;
+  }
+  .hero .foot .links a { color: rgba(239, 230, 184, 0.9); }
+  .hero .foot .links a:first-child { color: var(--paper); font-weight: 600; }
+  .hero .foot .meta-r { color: rgba(239, 230, 184, 0.65); font-family: var(--mono); }
+  @media (min-width: 880px) {
+    .hero .foot { grid-template-columns: 7fr 5fr; }
+    .hero .foot .meta-r { text-align: right; }
+    .hero .foot .links a:nth-child(3) { display: inline; }
+  }
+  .hero .foot .links a:nth-child(3) { display: none; }
+
+  .eyebrow.on-dark { color: rgba(239, 230, 184, 0.7); }
+
+  /* ─────────────────────────  BANDS  ───────────────────────── */
+  section.band {
+    border-top: 4px solid var(--ink);
+    padding: clamp(4rem, 8vw, 7.5rem) 0;
+    position: relative;
+  }
+  section.band.paper { background: var(--paper); }
+  section.band.soft  { background: var(--paper-soft); }
+  section.band.deep  { background: var(--paper-deep); }
+  section.band.ink   { background: var(--ink); color: var(--paper); }
+  section.band.ink .eyebrow { color: rgba(239, 230, 184, 0.7); }
+
+  .section-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 2rem;
+    border-bottom: 2px solid var(--ink); padding-bottom: 1.5rem;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  }
+  .section-head h2 {
+    font-size: clamp(2.25rem, 4.5vw, 4rem);
+    margin-top: 0.6rem;
+  }
+  .section-head .all-link {
+    display: none;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+    white-space: nowrap;
+  }
+  @media (min-width: 768px) { .section-head .all-link { display: inline-block; } }
+
+  /* ─────────────────────────  CREDO  ───────────────────────── */
+  .credo .row { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+  @media (min-width: 880px) { .credo .row { grid-template-columns: 3fr 9fr; gap: 3.5rem; } }
+  .credo .lead {
+    font-family: var(--serif); font-weight: 500; line-height: 1.3;
+    font-size: clamp(1.5rem, 2.8vw, 2.5rem);
+    letter-spacing: -0.018em;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .credo .pillars {
+    margin-top: clamp(2.5rem, 5vw, 4rem);
+    display: grid; grid-template-columns: 1fr;
+    border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  }
+  .credo .pillar { padding: 1.75rem 0; }
+  .credo .pillar + .pillar { border-top: 2px solid var(--ink); }
+  .credo .pillar .num {
+    font-family: var(--mono); color: var(--ink-muted);
+    font-size: 0.7rem; letter-spacing: 0.04em; display: block; margin-bottom: 0.6rem;
+  }
+  .credo .pillar h3 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 1.375rem; margin: 0; letter-spacing: -0.015em;
+    line-height: 1.15;
+  }
+  .credo .pillar p {
+    margin: 0.75rem 0 0; color: var(--ink-muted);
+    font-size: 0.9375rem; line-height: 1.6; max-width: 22rem;
+  }
+  @media (min-width: 720px) {
+    .credo .pillars { grid-template-columns: repeat(3, 1fr); }
+    .credo .pillar { padding: 2rem 1.75rem; }
+    .credo .pillar:first-child { padding-left: 0; }
+    .credo .pillar:last-child { padding-right: 0; }
+    .credo .pillar + .pillar { border-top: 0; border-left: 2px solid var(--ink); }
+    .credo .pillar h3 { font-size: 1.5rem; }
+  }
+
+  /* ─────────────────────────  ABOUT / IAN  ───────────────────────── */
+  .meet { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; }
+  @media (min-width: 880px) { .meet { grid-template-columns: 5fr 7fr; gap: 3.5rem; } }
+  .meet .portrait {
+    margin: 0;
+    position: relative;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    border: 2px solid var(--ink);
+  }
+  .meet .portrait img { width: 100%; height: 100%; object-fit: cover; }
+  .meet .portrait figcaption {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: var(--ink); color: var(--paper);
+    padding: 0.75rem 1.25rem;
+    display: flex; align-items: baseline; justify-content: space-between;
+    font-family: var(--mono);
+  }
+  .meet .portrait figcaption .l {
+    color: rgba(239, 230, 184, 0.75);
+    font-size: 0.7rem; letter-spacing: 0.04em;
+  }
+  .meet .portrait figcaption .r {
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+    color: var(--paper);
+    font-family: var(--serif);
+  }
+  .meet h2 {
+    font-size: clamp(2.25rem, 4.5vw, 4.5rem);
+    margin: 1rem 0 0; line-height: 1.0;
+  }
+  .meet p.bio {
+    margin-top: 1.75rem; font-size: clamp(1.0625rem, 1.2vw, 1.125rem);
+    line-height: 1.65; color: var(--ink-soft); max-width: 36rem;
+  }
+  .meet p.bio.muted { margin-top: 1.25rem; color: var(--ink-muted); font-size: 1rem; }
+  .meet .more {
+    margin-top: 2.25rem; padding-top: 1.5rem;
+    border-top: 2px solid rgba(26, 20, 16, 0.3);
+  }
+  @media (min-width: 880px) { .meet .text { padding-top: 1rem; } }
+
+  /* ─────────────────────────  SERVICES  ───────────────────────── */
+  .services-grid { display: grid; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+  .services-grid > div {
+    padding: clamp(1.75rem, 3vw, 2.75rem);
+    border-top: 2px solid var(--ink);
+    color: var(--ink);
+  }
+  @media (min-width: 720px) {
+    .services-grid > div:nth-child(odd) { border-right: 2px solid var(--ink); }
+  }
+  .services-grid > div .top {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid rgba(26, 20, 16, 0.3);
+    padding-bottom: 0.875rem; margin-bottom: 1.75rem;
+  }
+  .services-grid > div .top .num {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted);
+  }
+  .services-grid > div .top .cat {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wood);
+  }
+  .services-grid > div h3 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    line-height: 1.15; margin: 0; letter-spacing: -0.018em;
+  }
+  .services-grid > div p {
+    margin: 1rem 0 0;
+    color: var(--ink-muted); font-size: 0.9375rem; line-height: 1.65;
+    max-width: 28rem;
+  }
+
+  /* ─────────────────────────  WORK GRID  ───────────────────────── */
+  .work-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  @media (min-width: 720px) {
+    .work-grid {
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 9rem;
+      gap: 1.25rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .work-grid { grid-auto-rows: 10rem; gap: 1.5rem; }
+  }
+  .work-grid figure {
+    margin: 0; border: 2px solid var(--ink); position: relative; overflow: hidden;
+    aspect-ratio: 4 / 3;
+  }
+  @media (min-width: 720px) { .work-grid figure { aspect-ratio: auto; } }
+  .work-grid figure a { display: block; height: 100%; width: 100%; position: relative; }
+  .work-grid figure img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+  .work-grid figure:hover img { transform: scale(1.04); }
+  .work-grid figure figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 1rem 1.25rem;
+    background: linear-gradient(180deg, transparent 0%, rgba(26,20,16,0.75) 50%, var(--ink) 100%);
+    color: var(--paper);
+  }
+  .work-grid figure figcaption .meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 0.4rem;
+  }
+  .work-grid figure figcaption .meta .num {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    color: rgba(239, 230, 184, 0.75);
+  }
+  .work-grid figure figcaption .meta .cat {
+    font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+    color: rgba(239, 230, 184, 0.85);
+  }
+  .work-grid figure figcaption .ttl {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.125rem, 1.5vw, 1.4rem); line-height: 1.2; letter-spacing: -0.015em;
+  }
+  /* Asymmetric tile spans — clean grid math, no overlaps */
+  @media (min-width: 720px) {
+    .tile-a { grid-column: span 4; grid-row: span 3; }
+    .tile-b { grid-column: span 2; grid-row: span 3; }
+    .tile-c { grid-column: span 3; grid-row: span 2; }
+    .tile-d { grid-column: span 3; grid-row: span 2; }
+    .tile-e { grid-column: span 2; grid-row: span 2; }
+    .tile-f { grid-column: span 4; grid-row: span 2; }
+  }
+
+  /* ─────────────────────────  BEFORE/AFTER  ───────────────────────── */
+  .ba-stack { display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 4.5vw, 3.5rem); }
+  .ba {
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    border-top: 2px solid var(--ink); padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  @media (min-width: 900px) {
+    .ba { grid-template-columns: 4fr 8fr; gap: 2.5rem; align-items: start; }
+  }
+  .ba .copy h3 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.5rem, 2.4vw, 2rem);
+    margin: 0.5rem 0 0; line-height: 1.15; letter-spacing: -0.018em;
+  }
+  .ba .copy p {
+    margin: 0.875rem 0 0; color: var(--ink-muted);
+    font-size: 0.9375rem; line-height: 1.65; max-width: 26rem;
+  }
+  .ba .copy .cat {
+    display: inline-block; margin-top: 1.25rem;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--wood); font-weight: 700;
+  }
+  .ba .copy .num {
+    font-family: var(--mono); color: var(--ink-muted);
+    font-size: 0.7rem; letter-spacing: 0.04em; display: block;
+  }
+
+  .compare {
+    position: relative; width: 100%; aspect-ratio: 4 / 3;
+    border: 2px solid var(--ink); overflow: hidden;
+    user-select: none; touch-action: none;
+    background: var(--ink);
+  }
+  .compare img {
+    position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+    pointer-events: none;
+  }
+  .compare .img-after {
+    clip-path: inset(0 0 0 var(--pos, 50%));
+  }
+  /* Labels at bottom corners — never overlap with the divider */
+  .compare .label {
+    position: absolute; bottom: 0.875rem;
+    font-family: var(--mono);
+    font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 600;
+    color: var(--paper);
+    background: rgba(26, 20, 16, 0.85);
+    padding: 0.35rem 0.7rem;
+    pointer-events: none;
+    border: 1px solid rgba(239, 230, 184, 0.35);
+    backdrop-filter: blur(2px);
+  }
+  .compare .label.before { left: 0.875rem; }
+  .compare .label.after  { right: 0.875rem; }
+  .compare .divider {
+    position: absolute; top: 0; bottom: 0;
+    left: var(--pos, 50%);
+    width: 2px; background: var(--paper);
+    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(26, 20, 16, 0.45);
+  }
+  .compare .handle {
+    position: absolute; top: 50%; left: var(--pos, 50%);
+    transform: translate(-50%, -50%);
+    width: 52px; height: 52px;
+    background: var(--paper); color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: ew-resize;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .compare .handle::before, .compare .handle::after {
+    content: ""; width: 0; height: 0;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+  .compare .handle::before { border-right: 7px solid var(--ink); margin-right: 4px; }
+  .compare .handle::after  { border-left:  7px solid var(--ink); margin-left:  4px; }
+  .compare:focus-within .handle { outline: 2px solid var(--wood); outline-offset: 3px; }
+
+  /* ─────────────────────────  TESTIMONIALS  ───────────────────────── */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .testimonials-grid figure {
+    margin: 0; padding: 2rem 0;
+    border-bottom: 2px solid var(--ink);
+  }
+  .testimonials-grid figure:first-child { padding-top: 0.5rem; }
+  .testimonials-grid figure:last-child { border-bottom: 0; }
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 2px solid var(--ink);
+    }
+    .testimonials-grid figure {
+      padding: 0 1.75rem 0.5rem;
+      border-bottom: 0; border-right: 2px solid var(--ink);
+    }
+    .testimonials-grid figure:first-child { padding-left: 0; }
+    .testimonials-grid figure:last-child  { padding-right: 0; border-right: 0; }
+  }
+  .testimonials-grid .num {
+    font-family: var(--mono);
+    font-size: 0.7rem; color: var(--ink-muted);
+    display: block;
+  }
+  .testimonials-grid blockquote {
+    font-family: var(--serif); font-weight: 500;
+    font-size: clamp(1.125rem, 1.4vw, 1.3125rem); line-height: 1.4;
+    color: var(--ink-soft); margin: 1rem 0 0; letter-spacing: -0.005em;
+  }
+  .testimonials-grid figcaption {
+    margin-top: 1.5rem; padding-top: 1rem;
+    border-top: 1px solid rgba(26, 20, 16, 0.3);
+    font-family: var(--serif);
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+    color: var(--ink-muted);
+  }
+
+  .secondary-quotes {
+    margin-top: 2.5rem;
+    display: grid; grid-template-columns: 1fr; gap: 1.5rem;
+    padding-top: 2rem;
+  }
+  @media (min-width: 768px) {
+    .secondary-quotes {
+      grid-template-columns: 1fr 1fr; gap: 2.5rem;
+      padding-top: 2.5rem; border-top: 2px solid var(--ink);
+    }
+  }
+  .secondary-quotes p {
+    font-size: 1rem; line-height: 1.55; color: var(--ink-soft);
+  }
+  .secondary-quotes .name {
+    font-family: var(--serif); font-weight: 700;
+    font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-muted);
+    display: block; margin-bottom: 0.5rem;
+  }
+
+  /* ─────────────────────────  CONTACT  ───────────────────────── */
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: end;
+  }
+  @media (min-width: 880px) { .contact-grid { grid-template-columns: 7fr 5fr; gap: 4rem; } }
+  .contact-grid h2 {
+    font-size: clamp(2.5rem, 6.5vw, 6.5rem);
+    line-height: 0.98; margin: 1.5rem 0 0;
+  }
+  .contact-grid p.lede {
+    margin-top: 1.75rem; max-width: 38rem;
+    color: rgba(239, 230, 184, 0.85);
+    line-height: 1.65; font-size: 1.0625rem;
+  }
+  .contact-grid .right { border-left: 0; padding-left: 0; }
+  @media (min-width: 880px) {
+    .contact-grid .right { border-left: 2px solid rgba(239, 230, 184, 0.25); padding-left: 2.5rem; }
+  }
+  .contact-grid ul { display: flex; flex-direction: column; gap: 1.75rem; }
+  .contact-grid ul .label { color: rgba(239, 230, 184, 0.65); margin: 0; }
+  .contact-grid ul a.value {
+    font-family: var(--serif); font-weight: 700; line-height: 1.0;
+    margin-top: 0.5rem; display: inline-block; letter-spacing: -0.02em;
+  }
+  .contact-grid ul a.value.lg { font-size: 1.875rem; }
+  .contact-grid ul a.value.md { font-size: 1.375rem; word-break: break-all; }
+
+  /* Contact form */
+  .contact-form {
+    margin-top: clamp(3rem, 5vw, 5rem);
+    border-top: 2px solid rgba(239, 230, 184, 0.25);
+    padding-top: clamp(2rem, 3vw, 3rem);
+    display: grid; grid-template-columns: 1fr; gap: 1.75rem;
+  }
+  @media (min-width: 700px) { .contact-form .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; } }
+  .contact-form label { display: block; }
+  .contact-form .label-text {
+    display: block;
+    font-family: var(--serif);
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+    color: rgba(239, 230, 184, 0.7);
+    margin-bottom: 0.6rem;
+  }
+  .contact-form input, .contact-form textarea, .contact-form select {
+    width: 100%;
+    background: transparent;
+    border: 0; border-bottom: 1.5px solid rgba(239, 230, 184, 0.55);
+    color: var(--paper);
+    font: inherit;
+    padding: 0.6rem 0;
+    font-family: var(--serif);
+    font-size: 1rem;
+  }
+  .contact-form input::placeholder, .contact-form textarea::placeholder {
+    color: rgba(239, 230, 184, 0.4);
+  }
+  .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
+    outline: none; border-bottom-color: var(--paper);
+  }
+  .contact-form textarea { min-height: 5.5rem; resize: vertical; }
+  .contact-form select option { background: var(--ink); color: var(--paper); }
+  .contact-form .submit {
+    margin-top: 0.5rem;
+    border: 1.5px solid var(--paper);
+    color: var(--paper);
+    padding: 0.95rem 1.85rem;
+    font-family: var(--serif);
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
+    transition: background 0.2s, color 0.2s;
+    justify-self: start;
+  }
+  .contact-form .submit:hover { background: var(--paper); color: var(--ink); }
+
+  /* ─────────────────────────  FOOTER  ───────────────────────── */
+  footer.site {
+    background: var(--ink); color: var(--paper);
+    border-top: 4px solid var(--ink);
+  }
+  footer.site .top-band {
+    border-bottom: 2px solid rgba(239, 230, 184, 0.15);
+    padding: clamp(3rem, 6vw, 5.5rem) 0;
+  }
+  footer.site .top-band .row {
+    display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: end;
+  }
+  @media (min-width: 880px) { footer.site .top-band .row { grid-template-columns: 8fr 4fr; gap: 2rem; } }
+  footer.site .top-band .signoff {
+    font-size: clamp(2.75rem, 8.5vw, 7.5rem);
+    line-height: 0.95; margin: 2rem 0 0;
+  }
+  footer.site .top-band .right { padding-left: 0; border-left: 0; }
+  @media (min-width: 880px) {
+    footer.site .top-band .right { padding-left: 2rem; border-left: 2px solid rgba(239, 230, 184, 0.15); }
+  }
+  footer.site .top-band .right p { color: rgba(239, 230, 184, 0.75); font-size: 0.9375rem; line-height: 1.65; }
+  footer.site .nav-band {
+    border-bottom: 2px solid rgba(239, 230, 184, 0.15);
+    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem;
+  }
+  @media (min-width: 768px) { footer.site .nav-band { grid-template-columns: repeat(4, 1fr); } }
+  footer.site .nav-band p.eyebrow { color: rgba(239, 230, 184, 0.55); }
+  footer.site .nav-band ul { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  footer.site .nav-band ul a { font-size: 0.9375rem; color: rgba(239, 230, 184, 0.85); }
+  footer.site .nav-band ul a:hover { color: var(--paper); }
+  footer.site .nav-band li.dim { color: rgba(239, 230, 184, 0.6); padding-top: 0.4rem; }
+  footer.site .nav-band p.area { font-size: 0.9375rem; color: rgba(239, 230, 184, 0.75); margin-top: 1.25rem; line-height: 1.65; }
+  footer.site .legal {
+    padding: 1.5rem 0;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    font-family: var(--mono);
+    font-size: 0.7rem; letter-spacing: 0.05em;
+    color: rgba(239, 230, 184, 0.55);
+  }
+  @media (min-width: 768px) { footer.site .legal { flex-direction: row; justify-content: space-between; } }
+
+  /* utility */
+  @media (max-width: 767.5px) { .show-md { display: none !important; } }
+  @media (min-width: 768px)   { .hide-md { display: none !important; } }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- ─────────────────────────────────────────────────────────────  NAV  ───────────────────────────────────────────────────────── -->
+<header class="site" id="site-header">
+  <div class="container">
+    <div class="bar">
+      <a href="#top" class="brand" aria-label="Design Build & Renovate — home">
+        <img src="logo.svg" alt="" aria-hidden="true" class="mark" />
+        <span>
+          <img src="wordmark.svg" alt="Design Build & Renovate" class="wordmark" />
+          <span class="meta show-md">St. Clair Shores, MI</span>
+        </span>
+      </a>
+
+      <nav class="primary" aria-label="Primary">
+        <a href="#work">Work</a>
+        <a href="#services">Services</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+        <a class="phone" href="tel:+15868501229">(586) 850-1229</a>
+      </nav>
+
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <svg width="26" height="16" viewBox="0 0 26 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="2" x2="26" y2="2" />
+          <line x1="0" y1="14" x2="26" y2="14" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Site menu">
+  <div class="top">
+    <span class="brand">
+      <img src="logo.svg" alt="" aria-hidden="true" class="mark" style="height:2.5rem;width:auto;" />
+      <img src="wordmark.svg" alt="Design Build & Renovate" class="wordmark" style="height:0.75rem;width:auto;" />
+    </span>
+    <button id="menu-close" aria-label="Close menu">
+      <svg width="22" height="22" viewBox="0 0 22 22"><line x1="2" y1="2" x2="20" y2="20" stroke="currentColor" stroke-width="2"/><line x1="20" y1="2" x2="2" y2="20" stroke="currentColor" stroke-width="2"/></svg>
+    </button>
+  </div>
+  <nav>
+    <a href="#work"><span class="sheet-num">01</span><span class="display">Work</span></a>
+    <a href="#services"><span class="sheet-num">02</span><span class="display">Services</span></a>
+    <a href="#about"><span class="sheet-num">03</span><span class="display">About</span></a>
+    <a href="#testimonials"><span class="sheet-num">04</span><span class="display">Testimonials</span></a>
+    <a href="#contact"><span class="sheet-num">05</span><span class="display">Contact</span></a>
+    <div class="divider"></div>
+    <a href="tel:+15868501229" style="font-size:1.0625rem;color:var(--ink);">(586) 850-1229</a>
+    <a href="mailto:designbr.llc@gmail.com" style="font-size:1.0625rem;color:var(--ink-muted);">designbr.llc@gmail.com</a>
+  </nav>
+</div>
+
+<main id="main">
+
+  <!-- ─────────────────────────  HERO  ───────────────────────── -->
+  <section class="hero" id="top">
+    <div class="bg">
+      <img src="images/projects/gazebo.jpg" alt="" loading="eager" fetchpriority="high" />
+      <!-- TODO_IAN: Replace with hi-res photo of completed gazebo -->
+    </div>
+    <div class="scrim"></div>
+    <div class="container inner">
+      <div class="sheet-meta">
+        <span class="sheet-num">Carpentry &amp; finish work</span>
+        <span class="sheet-num show-md">Est. 2019 &middot; St. Clair Shores, MI</span>
+      </div>
+
+      <div class="body-block">
+        <p class="eyebrow on-dark">Ian O'Ray &middot; Design Build &amp; Renovate</p>
+        <h1 class="display-lg">Custom carpentry,<br/>finished by hand.</h1>
+        <p class="lede">
+          I'm Ian. I run a one-person carpentry shop on the lake side of Metro Detroit — Grosse Pointe, the lakeshore, and the neighborhoods nearby. The person who quotes the project is the person who builds it.
+        </p>
+      </div>
+
+      <div class="foot">
+        <div class="links">
+          <a class="link-underline" href="#work">See the work</a>
+          <a class="link-underline" href="tel:+15868501229">(586) 850-1229</a>
+          <a class="link-underline" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
+        </div>
+        <span class="meta-r" style="font-size:0.7rem; letter-spacing:0.05em;">Drawn &amp; built by hand</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  CREDO  ───────────────────────── -->
+  <section class="band paper credo">
+    <div class="container">
+      <div class="row">
+        <div>
+          <p class="eyebrow">The shop</p>
+          <p class="sheet-num" style="margin-top:0.6rem;">№ 01</p>
+        </div>
+        <div>
+          <p class="lead">
+            One craftsman. Every cut. From the first measure to the last coat of finish — same hands, start to finish. I do the work I quote.
+          </p>
+          <div class="pillars">
+            <div class="pillar">
+              <span class="num">№ 01</span>
+              <h3>Built on site</h3>
+              <p>Joinery and millwork built to the room — measured, cut, and fit in place.</p>
+            </div>
+            <div class="pillar">
+              <span class="num">№ 02</span>
+              <h3>One point of contact</h3>
+              <p>You talk to the person doing the work. Every day, every question.</p>
+            </div>
+            <div class="pillar">
+              <span class="num">№ 03</span>
+              <h3>Honest pricing</h3>
+              <p>Fair quotes up front. What I bid is what you pay.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  ABOUT  ───────────────────────── -->
+  <section class="band soft" id="about">
+    <div class="container">
+      <div class="meet">
+        <figure class="portrait">
+          <img src="images/portrait/ian-oray.jpg" alt="Ian O'Ray, Design Build & Renovate" loading="lazy" />
+          <!-- TODO_IAN: Replace with hi-res studio portrait -->
+          <figcaption>
+            <span class="l">Owner &amp; carpenter</span>
+            <span class="r">Ian O'Ray</span>
+          </figcaption>
+        </figure>
+        <div class="text">
+          <p class="eyebrow">About</p>
+          <h2 class="display-lg">Ian O'Ray.</h2>
+          <p class="bio">
+            I'm a carpenter. I started Design Build &amp; Renovate so I could do every part of a project myself — measure it, draw it, build it, install it. No middlemen. The work is the work.
+          </p>
+          <p class="bio muted">
+            Most of what I do lives in the in-between: a kitchen that needs more than a refresh but less than a gut, a staircase that's been waiting twenty years, a closet that should have been built right the first time. Good work, fair prices.
+          </p>
+          <!-- TODO_IAN: About/bio paragraph from Ian -->
+          <div class="more">
+            <a class="link-underline" href="#contact" style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;">Get in touch →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  SERVICES  ───────────────────────── -->
+  <section class="band paper" id="services">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Services</p>
+          <h2 class="display-lg">What I do.</h2>
+        </div>
+        <a class="link-underline all-link" href="#contact">Talk through a project →</a>
+      </div>
+
+      <div class="services-grid">
+        <div>
+          <div class="top"><span class="num">№ 01</span><span class="cat">Interior</span></div>
+          <h3>Custom Millwork &amp; Built-Ins</h3>
+          <p>Floating shelves, radiator covers, libraries, mudrooms, closet systems — drawn, milled, and installed.</p>
+        </div>
+        <div>
+          <div class="top"><span class="num">№ 02</span><span class="cat">Wet rooms</span></div>
+          <h3>Kitchen &amp; Bath</h3>
+          <p>Refacing through full remodels. Tile, backsplash, venetian plaster, and the millwork that ties the room together.</p>
+        </div>
+        <div>
+          <div class="top"><span class="num">№ 03</span><span class="cat">Trim</span></div>
+          <h3>Finish Carpentry &amp; Trim</h3>
+          <p>Staircases, base, casing, panel mouldings, doors, and joinery worth standing close to.</p>
+        </div>
+        <div>
+          <div class="top"><span class="num">№ 04</span><span class="cat">Outdoor</span></div>
+          <h3>Exterior Carpentry</h3>
+          <p>Cedar pergolas, gazebos, decks, and docks. Built to weather a Michigan winter.</p>
+        </div>
+      </div>
+      <div class="rule" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  WORK  ───────────────────────── -->
+  <section class="band soft" id="work">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Recent Work</p>
+          <h2 class="display-lg">A few projects.</h2>
+        </div>
+        <a class="link-underline all-link" href="#before-after">Before &amp; after →</a>
+      </div>
+
+      <div class="work-grid">
+        <figure class="tile-a">
+          <a href="#before-after">
+            <img src="images/projects/wood-flooring-drama-shot.jpg" alt="Wide-plank hardwood flooring with sun coming through" loading="lazy"/>
+            <!-- TODO_IAN: Replace with hi-res photo of hardwood drama shot -->
+            <figcaption>
+              <div class="meta"><span class="num">№ 01</span><span class="cat">Flooring</span></div>
+              <span class="ttl">Wide-plank hardwood</span>
+            </figcaption>
+          </a>
+        </figure>
+        <figure class="tile-b">
+          <a href="#before-after">
+            <img src="images/projects/stairway-after.jpg" alt="Refinished staircase with new dark treads and white risers" loading="lazy"/>
+            <!-- TODO_IAN: Replace with hi-res photo of staircase millwork -->
+            <figcaption>
+              <div class="meta"><span class="num">№ 02</span><span class="cat">Finish &amp; Trim</span></div>
+              <span class="ttl">Stair railing rebuild</span>
+            </figcaption>
+          </a>
+        </figure>
+        <figure class="tile-c">
+          <a href="#before-after">
+            <img src="images/projects/tile-work-and-lit-cabinet.webp" alt="Backlit display cabinet with tile work" loading="lazy"/>
+            <!-- TODO_IAN: Replace with hi-res photo of lit cabinet and tile -->
+            <figcaption>
+              <div class="meta"><span class="num">№ 03</span><span class="cat">Kitchen &amp; Bath</span></div>
+              <span class="ttl">Lit cabinetry &amp; tile</span>
+            </figcaption>
+          </a>
+        </figure>
+        <figure class="tile-d">
+          <a href="#before-after">
+            <img src="images/projects/dock-in-progress-onto-boat.jpg" alt="Custom-built dock extending out to a boat slip on Lake St. Clair" loading="lazy"/>
+            <!-- TODO_IAN: Replace with hi-res photo of lakefront dock build -->
+            <figcaption>
+              <div class="meta"><span class="num">№ 04</span><span class="cat">Exterior</span></div>
+              <span class="ttl">Lake St. Clair dock</span>
+            </figcaption>
+          </a>
+        </figure>
+        <figure class="tile-e">
+          <a href="#before-after">
+            <img src="images/projects/closet-system.jpg" alt="Custom closet shelving and hanging rods" loading="lazy"/>
+            <!-- TODO_IAN: Replace with hi-res photo of closet system -->
+            <figcaption>
+              <div class="meta"><span class="num">№ 05</span><span class="cat">Millwork</span></div>
+              <span class="ttl">Closet system</span>
+            </figcaption>
+          </a>
+        </figure>
+        <figure class="tile-f">
+          <a href="#before-after">
+            <img src="images/projects/bathroom-after.jpg" alt="Renovated bathroom with new tile and fixtures" loading="lazy"/>
+            <!-- TODO_IAN: Replace with hi-res photo of finished bathroom -->
+            <figcaption>
+              <div class="meta"><span class="num">№ 06</span><span class="cat">Kitchen &amp; Bath</span></div>
+              <span class="ttl">Full bath remodel</span>
+            </figcaption>
+          </a>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  BEFORE/AFTER  ───────────────────────── -->
+  <section class="band paper" id="before-after">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Before &amp; After</p>
+          <h2 class="display-lg">Drag to compare.</h2>
+        </div>
+      </div>
+
+      <div class="ba-stack">
+
+        <article class="ba">
+          <div class="copy">
+            <span class="num">№ 01</span>
+            <h3>Full bath remodel</h3>
+            <p>Studs to finish — tile, plumbing rough-in, vanity build, and trim.</p>
+            <span class="cat">Kitchen &amp; Bath</span>
+          </div>
+          <div
+            class="compare"
+            data-compare
+            tabindex="0"
+            role="img"
+            aria-label="Bathroom remodel — before and after, drag to compare"
+          >
+            <img class="img-before" src="images/projects/bathroom-before.jpg" alt="Bathroom before remodel" loading="lazy" />
+            <img class="img-after"  src="images/projects/bathroom-after.jpg"  alt="Bathroom after remodel" loading="lazy" />
+            <span class="label before">Before</span>
+            <span class="label after">After</span>
+            <div class="divider" aria-hidden="true"></div>
+            <button class="handle" aria-label="Drag to reveal before / after"></button>
+          </div>
+        </article>
+
+        <article class="ba">
+          <div class="copy">
+            <span class="num">№ 02</span>
+            <h3>Stair rebuild &amp; railing</h3>
+            <p>Existing stair stripped to structure. New treads, risers, and a complete railing run.</p>
+            <span class="cat">Finish &amp; Trim</span>
+          </div>
+          <div
+            class="compare"
+            data-compare
+            tabindex="0"
+            role="img"
+            aria-label="Stairway rebuild — before and after, drag to compare"
+          >
+            <img class="img-before" src="images/projects/stairway-before.jpg" alt="Stairway before rebuild" loading="lazy" />
+            <img class="img-after"  src="images/projects/stairway-after.jpg"  alt="Stairway after rebuild" loading="lazy" />
+            <span class="label before">Before</span>
+            <span class="label after">After</span>
+            <div class="divider" aria-hidden="true"></div>
+            <button class="handle" aria-label="Drag to reveal before / after"></button>
+          </div>
+        </article>
+
+        <article class="ba">
+          <div class="copy">
+            <span class="num">№ 03</span>
+            <h3>Custom closet system</h3>
+            <p>An empty box turned into a built-from-scratch closet — shelving, hanging, and integrated drawers.</p>
+            <span class="cat">Millwork &amp; Built-Ins</span>
+          </div>
+          <div
+            class="compare"
+            data-compare
+            tabindex="0"
+            role="img"
+            aria-label="Closet system — before and after, drag to compare"
+          >
+            <img class="img-before" src="images/projects/closet-system-before.jpg" alt="Closet before build" loading="lazy" />
+            <img class="img-after"  src="images/projects/closet-system.jpg"        alt="Closet after build" loading="lazy" />
+            <span class="label before">Before</span>
+            <span class="label after">After</span>
+            <div class="divider" aria-hidden="true"></div>
+            <button class="handle" aria-label="Drag to reveal before / after"></button>
+          </div>
+        </article>
+
+        <article class="ba">
+          <div class="copy">
+            <span class="num">№ 04</span>
+            <h3>Hardwood floor refinish</h3>
+            <p>Sanded, stained, and finished. Same boards, different room.</p>
+            <span class="cat">Flooring</span>
+          </div>
+          <div
+            class="compare"
+            data-compare
+            tabindex="0"
+            role="img"
+            aria-label="Hardwood flooring — before and after, drag to compare"
+          >
+            <img class="img-before" src="images/projects/wood-flooring-before.jpg" alt="Wood flooring before refinishing" loading="lazy" />
+            <img class="img-after"  src="images/projects/wood-flooring-after.jpg"  alt="Wood flooring after refinishing" loading="lazy" />
+            <span class="label before">Before</span>
+            <span class="label after">After</span>
+            <div class="divider" aria-hidden="true"></div>
+            <button class="handle" aria-label="Drag to reveal before / after"></button>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  TESTIMONIALS  ───────────────────────── -->
+  <section class="band deep" id="testimonials">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">From clients</p>
+          <h2 class="display-lg">Kind words.</h2>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+        <figure>
+          <span class="num">№ 01</span>
+          <blockquote>&ldquo;This upgrade made the space look so much more open and inviting. Gorgeous job.&rdquo;</blockquote>
+          <figcaption>Mikayla Daniel</figcaption>
+        </figure>
+        <figure>
+          <span class="num">№ 02</span>
+          <blockquote>&ldquo;They do fantastic work. Highly recommend.&rdquo;</blockquote>
+          <figcaption>Chris Nellis</figcaption>
+        </figure>
+        <figure>
+          <span class="num">№ 03</span>
+          <blockquote>&ldquo;Beautiful update. They will surely enjoy that room.&rdquo;</blockquote>
+          <figcaption>Tina Secreto Provost</figcaption>
+        </figure>
+      </div>
+
+      <div class="secondary-quotes">
+        <div>
+          <span class="name">Randy Finch</span>
+          <p>&ldquo;Absolutely beautiful. Fantastic job. It looks amazing.&rdquo;</p>
+        </div>
+        <div>
+          <span class="name">Lori StLouis</span>
+          <p>&ldquo;That looks great.&rdquo;</p>
+        </div>
+      </div>
+
+      <p style="margin-top:2.5rem; font-family: var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--ink-muted);">
+        More client comments arriving as Ian collects them.
+      </p>
+      <!-- TODO_IAN: Additional verified testimonials and full client names -->
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  CONTACT  ───────────────────────── -->
+  <section class="band ink" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">Get in touch</p>
+          <h2 class="display-lg">Send a few details.<br/>I'll come take a look.</h2>
+          <p class="lede">
+            Phone, email, or the form below — whichever you prefer. A few photos of the room, a sketch, or just a description of what you're thinking.
+          </p>
+        </div>
+        <div class="right">
+          <ul>
+            <li>
+              <p class="eyebrow label">Phone</p>
+              <a class="value lg" href="tel:+15868501229">(586) 850-1229</a>
+            </li>
+            <li>
+              <p class="eyebrow label">Email</p>
+              <a class="value md" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
+            </li>
+            <li>
+              <p class="eyebrow label">Shop</p>
+              <span style="color:rgba(239,230,184,0.8); font-size:0.9375rem;">St. Clair Shores, MI</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <form
+        class="contact-form"
+        id="brief-form"
+        action="mailto:designbr.llc@gmail.com"
+        method="post"
+        enctype="text/plain"
+        aria-label="Project details"
+      >
+        <div class="pair">
+          <label>
+            <span class="label-text">Name</span>
+            <input type="text" name="Name" required autocomplete="name" />
+          </label>
+          <label>
+            <span class="label-text">Phone or email</span>
+            <input type="text" name="Contact" required />
+          </label>
+        </div>
+        <div class="pair">
+          <label>
+            <span class="label-text">City / Neighborhood</span>
+            <input type="text" name="Location" autocomplete="address-level2" />
+          </label>
+          <label>
+            <span class="label-text">Project type</span>
+            <select name="ProjectType">
+              <option value="">Select…</option>
+              <option>Custom Millwork &amp; Built-Ins</option>
+              <option>Kitchen &amp; Bath</option>
+              <option>Finish Carpentry &amp; Trim</option>
+              <option>Flooring</option>
+              <option>Exterior Carpentry</option>
+              <option>Other</option>
+            </select>
+          </label>
+        </div>
+        <label>
+          <span class="label-text">What's the project?</span>
+          <textarea name="Brief" rows="4" placeholder="A few sentences, a rough sketch, a couple of photos — whatever you have."></textarea>
+        </label>
+        <button type="submit" class="submit">Send →</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<!-- ─────────────────────────────────────────────────────────────  FOOTER  ───────────────────────────────────────────────────────── -->
+<footer class="site">
+  <div class="top-band">
+    <div class="container">
+      <div class="row">
+        <div>
+          <img src="wordmark.svg" alt="Design Build & Renovate LLC" class="invert" style="height:clamp(2rem, 4.5vw, 3rem);width:auto;display:block;" />
+          <p class="display-lg signoff">One craftsman.<br/>Every cut.</p>
+        </div>
+        <div class="right">
+          <img src="logo.svg" alt="" aria-hidden="true" class="invert" style="height:5rem;width:auto;margin-bottom:1.5rem;" />
+          <p>Carpentry and finish work for Grosse Pointe, the Lake St. Clair lakeshore, and the Metro Detroit communities nearby.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="nav-band">
+      <div>
+        <p class="eyebrow">Studio</p>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Direct</p>
+        <ul>
+          <li><a href="tel:+15868501229">(586) 850-1229</a></li>
+          <li><a href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a></li>
+          <li class="dim">St. Clair Shores, MI</li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Follow</p>
+        <ul>
+          <li><a href="https://instagram.com/design_builder_studio" rel="noopener">Instagram &mdash; @design_builder_studio</a></li>
+          <li><a href="https://facebook.com/designbr.llc" rel="noopener">Facebook</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Service area</p>
+        <p class="area">
+          Grosse Pointe (all five communities), Harrison Township, St. Clair Shores, Macomb, Clinton Township, Chesterfield, Sterling Heights, Rochester Hills, Birmingham.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="legal">
+      <p>&copy; <span id="year"></span> Design Build &amp; Renovate LLC</p>
+      <p>
+        Licensed
+        <!-- TODO_IAN: Builder license number for footer -->
+        &middot; Insured
+        <!-- TODO_IAN: Insurance carrier name -->
+        &middot; Est. 2019
+        <!-- TODO_IAN: Confirm year established — using 2019 as default -->
+      </p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ─────────────────────────  YEAR  ─────────────────────────
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ─────────────────────────  MOBILE MENU  ─────────────────────────
+  (function () {
+    const toggle = document.getElementById("menu-toggle");
+    const close  = document.getElementById("menu-close");
+    const menu   = document.getElementById("mobile-menu");
+    if (!toggle || !menu) return;
+    function open()  { menu.classList.add("open");    toggle.setAttribute("aria-expanded", "true");  document.body.style.overflow = "hidden"; }
+    function shut()  { menu.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); document.body.style.overflow = ""; }
+    toggle.addEventListener("click", open);
+    close && close.addEventListener("click", shut);
+    menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", shut));
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape") shut(); });
+  })();
+
+  // ─────────────────────────  HEADER COLOR ON SCROLL  ─────────────────────────
+  (function () {
+    const header = document.getElementById("site-header");
+    const hero   = document.querySelector(".hero");
+    if (!header || !hero) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) header.classList.remove("solid");
+          else header.classList.add("solid");
+        });
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(hero);
+  })();
+
+  // ─────────────────────────  BEFORE / AFTER COMPARE  ─────────────────────────
+  (function () {
+    const sliders = document.querySelectorAll("[data-compare]");
+    sliders.forEach((el) => {
+      let dragging = false;
+      const set = (clientX) => {
+        const rect = el.getBoundingClientRect();
+        const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
+        const pct = (x / rect.width) * 100;
+        el.style.setProperty("--pos", pct + "%");
+        el.setAttribute("aria-valuenow", String(Math.round(pct)));
+      };
+      el.style.setProperty("--pos", "50%");
+      el.setAttribute("role", "slider");
+      el.setAttribute("aria-valuemin", "0");
+      el.setAttribute("aria-valuemax", "100");
+      el.setAttribute("aria-valuenow", "50");
+
+      const onDown = (e) => {
+        dragging = true;
+        el.setPointerCapture && e.pointerId !== undefined && el.setPointerCapture(e.pointerId);
+        set((e.touches ? e.touches[0].clientX : e.clientX));
+      };
+      const onMove = (e) => {
+        if (!dragging) return;
+        set((e.touches ? e.touches[0].clientX : e.clientX));
+      };
+      const onUp = () => { dragging = false; };
+
+      el.addEventListener("pointerdown", onDown);
+      el.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+      el.addEventListener("touchstart", onDown, { passive: true });
+      el.addEventListener("touchmove",  onMove, { passive: true });
+      window.addEventListener("touchend", onUp);
+
+      el.addEventListener("keydown", (e) => {
+        const cur = parseFloat(getComputedStyle(el).getPropertyValue("--pos")) || 50;
+        let next = cur;
+        if (e.key === "ArrowLeft")  next = Math.max(0, cur - 4);
+        if (e.key === "ArrowRight") next = Math.min(100, cur + 4);
+        if (e.key === "Home")       next = 0;
+        if (e.key === "End")        next = 100;
+        if (next !== cur) {
+          e.preventDefault();
+          el.style.setProperty("--pos", next + "%");
+          el.setAttribute("aria-valuenow", String(Math.round(next)));
+        }
+      });
+
+      el.addEventListener("click", (e) => { set(e.clientX); });
+    });
+  })();
+</script>
+
+</body>
+</html>
