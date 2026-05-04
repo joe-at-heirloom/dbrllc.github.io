@@ -744,6 +744,71 @@
   /* utility */
   @media (max-width: 767.5px) { .show-md { display: none !important; } }
   @media (min-width: 768px)   { .hide-md { display: none !important; } }
+
+  /* ─────────────────────────  HERO ROTATION  ───────────────────────── */
+  .hero .bg img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    filter: sepia(0.18) saturate(1.05);
+  }
+  .hero .bg img.is-active { opacity: 0.6; }
+
+  /* ─────────────────────────  LIGHTBOX  ───────────────────────── */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 80;
+    background: rgba(13, 10, 8, 0.94);
+    display: none;
+    align-items: center; justify-content: center;
+    padding: clamp(1rem, 4vw, 3rem);
+  }
+  .lightbox.open { display: flex; }
+  .lightbox .frame {
+    position: relative; max-width: min(100%, 1200px); max-height: 100%;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .lightbox img {
+    max-width: 100%; max-height: 80vh; object-fit: contain;
+    border: 2px solid var(--paper);
+    background: var(--ink);
+  }
+  .lightbox .caption {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    color: var(--paper); font-family: var(--mono); font-size: 0.75rem;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid rgba(239, 230, 184, 0.3);
+    padding-bottom: 0.5rem;
+  }
+  .lightbox .caption .ttl {
+    font-family: var(--serif); font-weight: 700; font-size: 1.1rem;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+  }
+  .lightbox .caption .meta { color: rgba(239, 230, 184, 0.7); }
+  .lightbox button {
+    position: absolute; top: 50%; transform: translateY(-50%);
+    width: 52px; height: 52px;
+    background: var(--paper); color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 1.4rem; font-weight: 700;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .lightbox .lb-prev { left: -1.5rem; }
+  .lightbox .lb-next { right: -1.5rem; }
+  .lightbox .lb-close {
+    top: 0.5rem; right: 0.5rem; transform: none;
+    width: 40px; height: 40px;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 720px) {
+    .lightbox .lb-prev { left: 0.25rem; }
+    .lightbox .lb-next { right: 0.25rem; }
+  }
+  body.lb-open { overflow: hidden; }
 </style>
 </head>
 <body>
@@ -807,9 +872,11 @@
 
   <!-- ─────────────────────────  HERO  ───────────────────────── -->
   <section class="hero" id="top">
-    <div class="bg">
-      <img src="images/projects/gazebo.jpg" alt="" loading="eager" fetchpriority="high" />
-      <!-- TODO_IAN: Replace with hi-res photo of completed gazebo -->
+    <div class="bg" id="hero-bg">
+      <img src="images/projects/gazebo.webp"                    alt="" class="is-active" loading="eager" fetchpriority="high" />
+      <img src="images/projects/dock-in-progress-onto-boat.webp" alt="" loading="lazy" />
+      <img src="images/projects/wood-flooring-drama-shot.webp"   alt="" loading="lazy" />
+      <!-- TODO_IAN: Replace with hi-res hero photos (gazebo / dock / hardwood) -->
     </div>
     <div class="scrim"></div>
     <div class="container inner">
@@ -876,7 +943,7 @@
     <div class="container">
       <div class="meet">
         <figure class="portrait">
-          <img src="images/portrait/ian-oray.jpg" alt="Ian O'Ray, Design Build & Renovate" loading="lazy" />
+          <img src="images/portrait/ian-oray.webp" alt="Ian O'Ray, Design Build & Renovate" loading="lazy" />
           <!-- TODO_IAN: Replace with hi-res studio portrait -->
           <figcaption>
             <span class="l">Owner &amp; carpenter</span>
@@ -951,8 +1018,8 @@
 
       <div class="work-grid">
         <figure class="tile-a">
-          <a href="#before-after">
-            <img src="images/projects/wood-flooring-drama-shot.jpg" alt="Wide-plank hardwood flooring with sun coming through" loading="lazy"/>
+          <a href="#" data-lightbox="images/projects/wood-flooring-drama-shot.webp" data-title="Wide-plank hardwood" data-meta="Flooring">
+            <img src="images/projects/wood-flooring-drama-shot.webp" alt="Wide-plank hardwood flooring with sun coming through" loading="lazy"/>
             <!-- TODO_IAN: Replace with hi-res photo of hardwood drama shot -->
             <figcaption>
               <div class="meta"><span class="num">№ 01</span><span class="cat">Flooring</span></div>
@@ -961,8 +1028,8 @@
           </a>
         </figure>
         <figure class="tile-b">
-          <a href="#before-after">
-            <img src="images/projects/stairway-after.jpg" alt="Refinished staircase with new dark treads and white risers" loading="lazy"/>
+          <a href="#" data-lightbox="images/projects/stairway-after.webp" data-title="Stair railing rebuild" data-meta="Finish & Trim">
+            <img src="images/projects/stairway-after.webp" alt="Refinished staircase with new dark treads and white risers" loading="lazy"/>
             <!-- TODO_IAN: Replace with hi-res photo of staircase millwork -->
             <figcaption>
               <div class="meta"><span class="num">№ 02</span><span class="cat">Finish &amp; Trim</span></div>
@@ -971,7 +1038,7 @@
           </a>
         </figure>
         <figure class="tile-c">
-          <a href="#before-after">
+          <a href="#" data-lightbox="images/projects/tile-work-and-lit-cabinet.webp" data-title="Lit cabinetry & tile" data-meta="Kitchen & Bath">
             <img src="images/projects/tile-work-and-lit-cabinet.webp" alt="Backlit display cabinet with tile work" loading="lazy"/>
             <!-- TODO_IAN: Replace with hi-res photo of lit cabinet and tile -->
             <figcaption>
@@ -981,8 +1048,8 @@
           </a>
         </figure>
         <figure class="tile-d">
-          <a href="#before-after">
-            <img src="images/projects/dock-in-progress-onto-boat.jpg" alt="Custom-built dock extending out to a boat slip on Lake St. Clair" loading="lazy"/>
+          <a href="#" data-lightbox="images/projects/dock-in-progress-onto-boat.webp" data-title="Lake St. Clair dock" data-meta="Exterior">
+            <img src="images/projects/dock-in-progress-onto-boat.webp" alt="Custom-built dock extending out to a boat slip on Lake St. Clair" loading="lazy"/>
             <!-- TODO_IAN: Replace with hi-res photo of lakefront dock build -->
             <figcaption>
               <div class="meta"><span class="num">№ 04</span><span class="cat">Exterior</span></div>
@@ -991,8 +1058,8 @@
           </a>
         </figure>
         <figure class="tile-e">
-          <a href="#before-after">
-            <img src="images/projects/closet-system.jpg" alt="Custom closet shelving and hanging rods" loading="lazy"/>
+          <a href="#" data-lightbox="images/projects/closet-system.webp" data-title="Closet system" data-meta="Millwork">
+            <img src="images/projects/closet-system.webp" alt="Custom closet shelving and hanging rods" loading="lazy"/>
             <!-- TODO_IAN: Replace with hi-res photo of closet system -->
             <figcaption>
               <div class="meta"><span class="num">№ 05</span><span class="cat">Millwork</span></div>
@@ -1001,8 +1068,8 @@
           </a>
         </figure>
         <figure class="tile-f">
-          <a href="#before-after">
-            <img src="images/projects/bathroom-after.jpg" alt="Renovated bathroom with new tile and fixtures" loading="lazy"/>
+          <a href="#" data-lightbox="images/projects/bathroom-after.webp" data-title="Full bath remodel" data-meta="Kitchen & Bath">
+            <img src="images/projects/bathroom-after.webp" alt="Renovated bathroom with new tile and fixtures" loading="lazy"/>
             <!-- TODO_IAN: Replace with hi-res photo of finished bathroom -->
             <figcaption>
               <div class="meta"><span class="num">№ 06</span><span class="cat">Kitchen &amp; Bath</span></div>
@@ -1040,8 +1107,8 @@
             role="img"
             aria-label="Bathroom remodel — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/bathroom-before.jpg" alt="Bathroom before remodel" loading="lazy" />
-            <img class="img-after"  src="images/projects/bathroom-after.jpg"  alt="Bathroom after remodel" loading="lazy" />
+            <img class="img-before" src="images/projects/bathroom-before.webp" alt="Bathroom before remodel" loading="lazy" />
+            <img class="img-after"  src="images/projects/bathroom-after.webp"  alt="Bathroom after remodel" loading="lazy" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1063,8 +1130,8 @@
             role="img"
             aria-label="Stairway rebuild — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/stairway-before.jpg" alt="Stairway before rebuild" loading="lazy" />
-            <img class="img-after"  src="images/projects/stairway-after.jpg"  alt="Stairway after rebuild" loading="lazy" />
+            <img class="img-before" src="images/projects/stairway-before.webp" alt="Stairway before rebuild" loading="lazy" />
+            <img class="img-after"  src="images/projects/stairway-after.webp"  alt="Stairway after rebuild" loading="lazy" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1086,8 +1153,8 @@
             role="img"
             aria-label="Closet system — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/closet-system-before.jpg" alt="Closet before build" loading="lazy" />
-            <img class="img-after"  src="images/projects/closet-system.jpg"        alt="Closet after build" loading="lazy" />
+            <img class="img-before" src="images/projects/closet-system-before.webp" alt="Closet before build" loading="lazy" />
+            <img class="img-after"  src="images/projects/closet-system.webp"        alt="Closet after build" loading="lazy" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1109,8 +1176,8 @@
             role="img"
             aria-label="Hardwood flooring — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/wood-flooring-before.jpg" alt="Wood flooring before refinishing" loading="lazy" />
-            <img class="img-after"  src="images/projects/wood-flooring-after.jpg"  alt="Wood flooring after refinishing" loading="lazy" />
+            <img class="img-before" src="images/projects/wood-flooring-before.webp" alt="Wood flooring before refinishing" loading="lazy" />
+            <img class="img-after"  src="images/projects/wood-flooring-after.webp"  alt="Wood flooring after refinishing" loading="lazy" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1334,9 +1401,91 @@
   </div>
 </footer>
 
+<!-- ─────────────────────────  LIGHTBOX  ───────────────────────── -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Project image">
+  <div class="frame">
+    <img id="lb-img" alt="" />
+    <div class="caption">
+      <span class="ttl" id="lb-title"></span>
+      <span class="meta" id="lb-meta"></span>
+    </div>
+  </div>
+  <button class="lb-prev" id="lb-prev" aria-label="Previous image">‹</button>
+  <button class="lb-next" id="lb-next" aria-label="Next image">›</button>
+  <button class="lb-close" id="lb-close" aria-label="Close">×</button>
+</div>
+
 <script>
   // ─────────────────────────  YEAR  ─────────────────────────
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // ─────────────────────────  HERO ROTATION  ─────────────────────────
+  (function () {
+    const bg = document.getElementById("hero-bg");
+    if (!bg) return;
+    const imgs = bg.querySelectorAll("img");
+    if (imgs.length < 2) return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let i = 0;
+    setInterval(() => {
+      imgs[i].classList.remove("is-active");
+      i = (i + 1) % imgs.length;
+      imgs[i].classList.add("is-active");
+    }, 6000);
+  })();
+
+  // ─────────────────────────  LIGHTBOX  ─────────────────────────
+  (function () {
+    const triggers = document.querySelectorAll("[data-lightbox]");
+    if (!triggers.length) return;
+    const items = Array.from(triggers).map((t) => ({
+      src:   t.getAttribute("data-lightbox"),
+      title: t.getAttribute("data-title") || "",
+      meta:  t.getAttribute("data-meta")  || "",
+    }));
+    const lb     = document.getElementById("lightbox");
+    const img    = document.getElementById("lb-img");
+    const ttl    = document.getElementById("lb-title");
+    const meta   = document.getElementById("lb-meta");
+    const prev   = document.getElementById("lb-prev");
+    const next   = document.getElementById("lb-next");
+    const close  = document.getElementById("lb-close");
+    let idx = 0;
+
+    function show(i) {
+      idx = (i + items.length) % items.length;
+      const it = items[idx];
+      img.src = it.src;
+      img.alt = it.title || "";
+      ttl.textContent  = it.title;
+      meta.textContent = it.meta + "  ·  " + (idx + 1) + " / " + items.length;
+    }
+    function open(i) {
+      show(i);
+      lb.classList.add("open");
+      document.body.classList.add("lb-open");
+      close.focus();
+    }
+    function shut() {
+      lb.classList.remove("open");
+      document.body.classList.remove("lb-open");
+      img.src = "";
+    }
+
+    triggers.forEach((t, i) => {
+      t.addEventListener("click", (e) => { e.preventDefault(); open(i); });
+    });
+    prev.addEventListener("click", () => show(idx - 1));
+    next.addEventListener("click", () => show(idx + 1));
+    close.addEventListener("click", shut);
+    lb.addEventListener("click", (e) => { if (e.target === lb) shut(); });
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") shut();
+      if (e.key === "ArrowLeft")  show(idx - 1);
+      if (e.key === "ArrowRight") show(idx + 1);
+    });
+  })();
 
   // ─────────────────────────  MOBILE MENU  ─────────────────────────
   (function () {
