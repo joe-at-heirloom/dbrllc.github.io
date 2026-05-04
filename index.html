@@ -1198,29 +1198,28 @@
       <form
         class="contact-form"
         id="brief-form"
-        action="mailto:designbr.llc@gmail.com"
-        method="post"
-        enctype="text/plain"
+        action="https://formspree.io/f/xbdwgggg"
+        method="POST"
         aria-label="Project details"
       >
         <div class="pair">
           <label>
             <span class="label-text">Name</span>
-            <input type="text" name="Name" required autocomplete="name" />
+            <input type="text" name="name" required autocomplete="name" />
           </label>
           <label>
             <span class="label-text">Phone or email</span>
-            <input type="text" name="Contact" required />
+            <input type="text" name="contact" required />
           </label>
         </div>
         <div class="pair">
           <label>
             <span class="label-text">City / Neighborhood</span>
-            <input type="text" name="Location" autocomplete="address-level2" />
+            <input type="text" name="location" autocomplete="address-level2" />
           </label>
           <label>
             <span class="label-text">Project type</span>
-            <select name="ProjectType">
+            <select name="project_type">
               <option value="">Select…</option>
               <option>Custom Millwork &amp; Built-Ins</option>
               <option>Kitchen &amp; Bath</option>
@@ -1233,8 +1232,12 @@
         </div>
         <label>
           <span class="label-text">What's the project?</span>
-          <textarea name="Brief" rows="4" placeholder="A few sentences, a rough sketch, a couple of photos — whatever you have."></textarea>
+          <textarea name="message" rows="4" placeholder="A few sentences, a rough sketch, a couple of photos — whatever you have."></textarea>
         </label>
+        <!-- Honeypot — bots fill it, humans don't see it -->
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true" />
+        <input type="hidden" name="_subject" value="New project inquiry — Design Build & Renovate" />
+        <div id="form-status" role="status" aria-live="polite" style="font-size:0.875rem;color:rgba(239,230,184,0.85);min-height:1.25rem;"></div>
         <button type="submit" class="submit">Send →</button>
       </form>
     </div>
@@ -1343,6 +1346,39 @@
       { threshold: 0.25 }
     );
     io.observe(hero);
+  })();
+
+  // ─────────────────────────  CONTACT FORM (Formspree)  ─────────────────────────
+  (function () {
+    const form   = document.getElementById("brief-form");
+    const status = document.getElementById("form-status");
+    if (!form) return;
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const submit = form.querySelector(".submit");
+      const data   = new FormData(form);
+      status.textContent = "Sending…";
+      submit && (submit.disabled = true);
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          body: data,
+          headers: { "Accept": "application/json" },
+        });
+        if (res.ok) {
+          form.reset();
+          status.textContent = "Got it. I'll be in touch shortly.";
+        } else {
+          const j = await res.json().catch(() => ({}));
+          status.textContent = (j.errors && j.errors[0] && j.errors[0].message)
+            || "Something went wrong. Please call or email instead.";
+        }
+      } catch (_) {
+        status.textContent = "Network error. Please call or email instead.";
+      } finally {
+        submit && (submit.disabled = false);
+      }
+    });
   })();
 
   // ─────────────────────────  BEFORE / AFTER COMPARE  ─────────────────────────
