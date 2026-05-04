@@ -825,13 +825,19 @@
     margin-top: clamp(2rem, 4vw, 3.5rem);
     padding-top: clamp(1.5rem, 3vw, 2.25rem);
     border-top: 2px solid var(--ink);
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    align-items: baseline;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+    text-align: center;
   }
   @media (min-width: 720px) {
-    .brands-strip { grid-template-columns: auto 1fr; gap: 2rem; }
+    .brands-strip {
+      flex-direction: row;
+      align-items: baseline;
+      gap: 2rem;
+      text-align: left;
+    }
   }
   .brands-strip .label {
     font-family: var(--mono);
@@ -843,11 +849,15 @@
   }
   .brands-strip .list {
     display: flex; flex-wrap: wrap;
-    gap: 0.4rem 1.25rem;
+    justify-content: center;
+    gap: 0.35rem 1rem;
     font-family: var(--serif); font-weight: 700;
     font-size: clamp(1rem, 1.5vw, 1.25rem);
     letter-spacing: -0.005em;
     color: var(--ink-soft);
+  }
+  @media (min-width: 720px) {
+    .brands-strip .list { justify-content: flex-start; gap: 0.4rem 1.25rem; }
   }
   .brands-strip .list .sep {
     color: var(--wood);
@@ -1077,34 +1087,47 @@
   }
   .contact-grid ul { display: flex; flex-direction: column; gap: 1.75rem; }
   .contact-grid ul .label { color: rgba(239, 230, 184, 0.65); margin: 0; }
-  .contact-grid ul a.value {
-    font-family: var(--serif); font-weight: 700; line-height: 1.0;
-    margin-top: 0.5rem; display: inline-block; letter-spacing: -0.02em;
+  .contact-grid ul .label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
   }
-  .contact-grid ul a.value.lg,
-  .contact-grid ul a.value.md {
-    font-size: clamp(1.125rem, 1.7vw, 1.5rem);
-    overflow-wrap: anywhere;
-    word-break: normal;
-    line-height: 1.15;
+  .contact-grid ul .value {
+    display: block;
+    margin-top: 0.4rem;
     max-width: 100%;
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(1.125rem, 1.6vw, 1.375rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    overflow-wrap: anywhere;
+    color: var(--paper);
   }
+  .contact-grid ul a.value:hover { color: var(--wood); }
+  .contact-grid ul li + li { margin-top: 0.25rem; }
 
   /* Contact form */
   .contact-form {
     margin-top: clamp(3rem, 5vw, 5rem);
     border-top: 2px solid rgba(239, 230, 184, 0.25);
-    padding-top: clamp(2rem, 3vw, 3rem);
-    display: grid; grid-template-columns: 1fr; gap: 1.75rem;
+    padding-top: clamp(2.25rem, 3.5vw, 3rem);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 3vw, 2.5rem);
   }
-  @media (min-width: 700px) { .contact-form .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.75rem; } }
+  .contact-form .pair { display: grid; grid-template-columns: 1fr; gap: clamp(1.75rem, 3vw, 2.5rem); }
+  @media (min-width: 700px) {
+    .contact-form .pair { grid-template-columns: 1fr 1fr; gap: clamp(2rem, 3.5vw, 2.75rem); }
+  }
   .contact-form label { display: block; }
   .contact-form .label-text {
     display: block;
     font-family: var(--serif);
     font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
     color: rgba(239, 230, 184, 0.7);
-    margin-bottom: 0.6rem;
+    margin-bottom: 0.7rem;
   }
   .contact-form input, .contact-form textarea, .contact-form select {
     width: 100%;
@@ -1112,9 +1135,10 @@
     border: 0; border-bottom: 1.5px solid rgba(239, 230, 184, 0.55);
     color: var(--paper);
     font: inherit;
-    padding: 0.6rem 0;
+    padding: 0.75rem 0;
     font-family: var(--serif);
     font-size: 1rem;
+    line-height: 1.4;
   }
   .contact-form input::placeholder, .contact-form textarea::placeholder {
     color: rgba(239, 230, 184, 0.4);
@@ -1122,8 +1146,9 @@
   .contact-form input:focus, .contact-form textarea:focus, .contact-form select:focus {
     outline: none; border-bottom-color: var(--paper);
   }
-  .contact-form textarea { min-height: 5.5rem; resize: vertical; }
+  .contact-form textarea { min-height: 6.5rem; resize: vertical; padding-top: 0.75rem; }
   .contact-form select option { background: var(--ink); color: var(--paper); }
+  .contact-form .submit { margin-top: 0.75rem; }
   .contact-form .submit {
     margin-top: 0.5rem;
     background: var(--wood);
@@ -1949,18 +1974,18 @@
           </p>
         </div>
         <div class="right">
-          <ul>
+          <ul class="contact-list">
             <li>
               <p class="eyebrow label icon-leading"><svg class="icon" width="13" height="13"><use href="#icon-phone"/></svg>Phone</p>
-              <a class="value lg" href="tel:+15868501229">(586) 850-1229</a>
+              <a class="value" href="tel:+15868501229">(586) 850-1229</a>
             </li>
             <li>
               <p class="eyebrow label icon-leading"><svg class="icon" width="13" height="13"><use href="#icon-mail"/></svg>Email</p>
-              <a class="value md" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
+              <a class="value" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
             </li>
             <li>
               <p class="eyebrow label icon-leading"><svg class="icon" width="13" height="13"><use href="#icon-pin"/></svg>Based in</p>
-              <span style="color:rgba(239,230,184,0.8); font-size:0.9375rem;">St. Clair Shores, MI</span>
+              <span class="value">St. Clair Shores, MI</span>
             </li>
           </ul>
         </div>
