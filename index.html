@@ -237,9 +237,28 @@
   .link-underline:hover { opacity: 0.65; }
   .skip-link { position: absolute; left: -9999px; top: 0; }
   .skip-link:focus {
-    position: fixed; left: 0.5rem; top: 0.5rem; z-index: 100;
-    background: var(--ink); color: var(--paper); padding: 0.5rem 0.75rem;
+    position: fixed; left: 0.75rem; top: 0.75rem; z-index: 100;
+    background: var(--ink); color: var(--paper);
+    padding: 0.75rem 1.25rem;
+    font-family: var(--serif); font-weight: 700;
+    font-size: 0.875rem; letter-spacing: 0.04em;
+    border: 2px solid var(--paper);
+    outline: 3px solid var(--wood); outline-offset: 2px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.5);
   }
+
+  /* Visible focus outline on keyboard nav */
+  :focus-visible {
+    outline: 2px solid var(--wood);
+    outline-offset: 3px;
+  }
+  /* Buttons that already have their own focus treatment */
+  .compare:focus-visible,
+  .compare button:focus-visible { outline: 2px solid var(--wood); outline-offset: 3px; }
+  /* Form fields use border-color shift, suppress double rings */
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible,
+  .contact-form select:focus-visible { outline: none; }
   .invert { filter: invert(1) brightness(1.05) sepia(0.15); }
 
   /* Architectural registration marks — corner ticks like a blueprint sheet */
@@ -1882,14 +1901,17 @@
         const rect = el.getBoundingClientRect();
         const x = Math.min(Math.max(clientX - rect.left, 0), rect.width);
         const pct = (x / rect.width) * 100;
+        const r = Math.round(pct);
         el.style.setProperty("--pos", pct + "%");
-        el.setAttribute("aria-valuenow", String(Math.round(pct)));
+        el.setAttribute("aria-valuenow", String(r));
+        el.setAttribute("aria-valuetext", r + "% revealed — after");
       };
       el.style.setProperty("--pos", "50%");
       el.setAttribute("role", "slider");
       el.setAttribute("aria-valuemin", "0");
       el.setAttribute("aria-valuemax", "100");
       el.setAttribute("aria-valuenow", "50");
+      el.setAttribute("aria-valuetext", "50% revealed — after");
 
       const onDown = (e) => {
         dragging = true;
@@ -1918,8 +1940,10 @@
         if (e.key === "End")        next = 100;
         if (next !== cur) {
           e.preventDefault();
+          const r = Math.round(next);
           el.style.setProperty("--pos", next + "%");
-          el.setAttribute("aria-valuenow", String(Math.round(next)));
+          el.setAttribute("aria-valuenow", String(r));
+          el.setAttribute("aria-valuetext", r + "% revealed — after");
         }
       });
 
