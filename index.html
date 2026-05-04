@@ -391,32 +391,34 @@
   /* ─────────────────────────  SERVICES  ───────────────────────── */
   .services-grid { display: grid; grid-template-columns: 1fr; }
   @media (min-width: 720px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
-  .services-grid > div {
+  .services-grid > a {
     padding: clamp(1.75rem, 3vw, 2.75rem);
     border-top: 2px solid var(--ink);
     color: var(--ink);
+    transition: background-color 0.2s ease;
   }
+  .services-grid > a:hover { background: var(--paper); }
   @media (min-width: 720px) {
-    .services-grid > div:nth-child(odd) { border-right: 2px solid var(--ink); }
+    .services-grid > a:nth-child(odd) { border-right: 2px solid var(--ink); }
   }
-  .services-grid > div .top {
+  .services-grid > a .top {
     display: flex; justify-content: space-between; align-items: baseline;
     border-bottom: 1px solid rgba(26, 20, 16, 0.3);
     padding-bottom: 0.875rem; margin-bottom: 1.75rem;
   }
-  .services-grid > div .top .num {
+  .services-grid > a .top .num {
     font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted);
   }
-  .services-grid > div .top .cat {
+  .services-grid > a .top .cat {
     font-family: var(--serif); font-weight: 700;
     font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--wood);
   }
-  .services-grid > div h3 {
+  .services-grid > a h3 {
     font-family: var(--serif); font-weight: 700;
     font-size: clamp(1.5rem, 2.2vw, 2rem);
     line-height: 1.15; margin: 0; letter-spacing: -0.018em;
   }
-  .services-grid > div p {
+  .services-grid > a p {
     margin: 1rem 0 0;
     color: var(--ink-muted); font-size: 0.9375rem; line-height: 1.65;
     max-width: 28rem;
@@ -911,26 +913,26 @@
       </div>
 
       <div class="services-grid">
-        <div>
+        <a href="?type=Custom%20Millwork%20%26%20Built-Ins#contact">
           <div class="top"><span class="num">№ 01</span><span class="cat">Interior</span></div>
           <h3>Custom Millwork &amp; Built-Ins</h3>
           <p>Floating shelves, radiator covers, libraries, mudrooms, closet systems — drawn, milled, and installed.</p>
-        </div>
-        <div>
+        </a>
+        <a href="?type=Kitchen%20%26%20Bath#contact">
           <div class="top"><span class="num">№ 02</span><span class="cat">Wet rooms</span></div>
           <h3>Kitchen &amp; Bath</h3>
           <p>Refacing through full remodels. Tile, backsplash, venetian plaster, and the millwork that ties the room together.</p>
-        </div>
-        <div>
+        </a>
+        <a href="?type=Finish%20Carpentry%20%26%20Trim#contact">
           <div class="top"><span class="num">№ 03</span><span class="cat">Trim</span></div>
           <h3>Finish Carpentry &amp; Trim</h3>
           <p>Staircases, base, casing, panel mouldings, doors, and joinery worth standing close to.</p>
-        </div>
-        <div>
+        </a>
+        <a href="?type=Exterior%20Carpentry#contact">
           <div class="top"><span class="num">№ 04</span><span class="cat">Outdoor</span></div>
           <h3>Exterior Carpentry</h3>
           <p>Cedar pergolas, gazebos, decks, and docks. Built to weather a Michigan winter.</p>
-        </div>
+        </a>
       </div>
       <div class="rule" aria-hidden="true"></div>
     </div>
@@ -1219,7 +1221,7 @@
           </label>
           <label>
             <span class="label-text">Project type</span>
-            <select name="project_type">
+            <select name="project_type" id="project-type">
               <option value="">Select…</option>
               <option>Custom Millwork &amp; Built-Ins</option>
               <option>Kitchen &amp; Bath</option>
@@ -1230,10 +1232,29 @@
             </select>
           </label>
         </div>
+        <div class="pair">
+          <label>
+            <span class="label-text">Best time to call</span>
+            <select name="best_time">
+              <option value="">No preference</option>
+              <option>Mornings (8am–noon)</option>
+              <option>Afternoons (noon–5pm)</option>
+              <option>Evenings (5–8pm)</option>
+              <option>Weekends</option>
+            </select>
+          </label>
+          <label>
+            <span class="label-text">Heard about me from</span>
+            <input type="text" name="referrer" placeholder="Optional — neighbor, Instagram, Google…" />
+          </label>
+        </div>
         <label>
           <span class="label-text">What's the project?</span>
           <textarea name="message" rows="4" placeholder="A few sentences, a rough sketch, a couple of photos — whatever you have."></textarea>
         </label>
+        <p style="margin:0; font-family:var(--mono); font-size:0.7rem; letter-spacing:0.04em; color:rgba(239,230,184,0.6); line-height:1.5;">
+          I read every message and reply within 1&ndash;2 business days. Form acting up? Call <a href="tel:+15868501229" style="color:rgba(239,230,184,0.9); border-bottom:1px solid currentColor;">(586) 850-1229</a> or email <a href="mailto:designbr.llc@gmail.com" style="color:rgba(239,230,184,0.9); border-bottom:1px solid currentColor;">designbr.llc@gmail.com</a> &mdash; same result.
+        </p>
         <!-- Honeypot — bots fill it, humans don't see it -->
         <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;height:0;width:0;" aria-hidden="true" />
         <input type="hidden" name="_subject" value="New project inquiry — Design Build & Renovate" />
@@ -1353,11 +1374,29 @@
     const form   = document.getElementById("brief-form");
     const status = document.getElementById("form-status");
     if (!form) return;
+
+    // Auto-fill project_type from URL query (?type=Kitchen+%26+Bath) or hash query
+    (function prefill() {
+      const select = document.getElementById("project-type");
+      if (!select) return;
+      const params = new URLSearchParams(
+        window.location.search ||
+        (window.location.hash.includes("?") ? window.location.hash.split("?")[1] : "")
+      );
+      const type = params.get("type");
+      if (!type) return;
+      const match = Array.from(select.options).find(
+        (o) => o.value && o.value.toLowerCase() === type.toLowerCase()
+      );
+      if (match) select.value = match.value;
+    })();
+
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
       const submit = form.querySelector(".submit");
       const data   = new FormData(form);
-      status.textContent = "Sending…";
+      status.innerHTML = "Sending&hellip;";
+      status.style.color = "rgba(239,230,184,0.85)";
       submit && (submit.disabled = true);
       try {
         const res = await fetch(form.action, {
@@ -1367,15 +1406,18 @@
         });
         if (res.ok) {
           form.reset();
-          status.textContent = "Got it. I'll be in touch shortly.";
+          status.innerHTML = 'Got it &mdash; I\'ll be in touch within 1&ndash;2 business days. ' +
+            'If it\'s urgent, call <a href="tel:+15868501229" style="color:inherit;border-bottom:1px solid currentColor;">(586) 850-1229</a>.';
+          status.style.color = "var(--paper)";
+          submit && (submit.textContent = "Sent ✓");
         } else {
           const j = await res.json().catch(() => ({}));
-          status.textContent = (j.errors && j.errors[0] && j.errors[0].message)
-            || "Something went wrong. Please call or email instead.";
+          status.innerHTML = (j.errors && j.errors[0] && j.errors[0].message)
+            || 'Something went wrong. Please call <a href="tel:+15868501229" style="color:inherit;border-bottom:1px solid currentColor;">(586) 850-1229</a> or email <a href="mailto:designbr.llc@gmail.com" style="color:inherit;border-bottom:1px solid currentColor;">designbr.llc@gmail.com</a>.';
+          submit && (submit.disabled = false);
         }
       } catch (_) {
-        status.textContent = "Network error. Please call or email instead.";
-      } finally {
+        status.innerHTML = 'Network error. Please call <a href="tel:+15868501229" style="color:inherit;border-bottom:1px solid currentColor;">(586) 850-1229</a> or email <a href="mailto:designbr.llc@gmail.com" style="color:inherit;border-bottom:1px solid currentColor;">designbr.llc@gmail.com</a>.';
         submit && (submit.disabled = false);
       }
     });
