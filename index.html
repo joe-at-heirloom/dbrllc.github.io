@@ -242,6 +242,76 @@
     transition: color 0.2s ease, border-color 0.2s ease;
   }
   .link-underline:hover { color: var(--wood); border-color: var(--wood); }
+
+  /* ─────────────────────────  BUTTONS  ───────────────────────── */
+  .btn {
+    display: inline-flex;
+    align-items: center; gap: 0.6rem;
+    padding: 0.95rem 1.5rem;
+    font-family: var(--serif);
+    font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    border: 2px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+    line-height: 1;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn:active { transform: translateY(1px); }
+  .btn .arr { font-family: var(--mono); font-weight: 500; transition: transform 0.2s ease; }
+  .btn:hover .arr { transform: translateX(0.25rem); }
+
+  /* Primary: filled chestnut, cream type — pops on cream paper backgrounds */
+  .btn-primary {
+    background: var(--wood);
+    color: var(--paper);
+    border-color: var(--wood);
+    box-shadow: 0 2px 0 0 var(--wood-deep);
+  }
+  .btn-primary:hover {
+    background: var(--wood-deep);
+    color: var(--paper);
+    border-color: var(--wood-deep);
+    box-shadow: 0 4px 0 0 var(--ink);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active { transform: translateY(1px); box-shadow: 0 0 0 0 var(--ink); }
+
+  /* On dark sections, swap the outlined button to cream */
+  .on-dark.btn,
+  section.band.ink .btn,
+  .hero .btn {
+    border-color: var(--paper);
+    color: var(--paper);
+  }
+  .on-dark.btn:hover,
+  section.band.ink .btn:hover,
+  .hero .btn:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+  .hero .btn-primary,
+  section.band.ink .btn-primary {
+    background: var(--wood);
+    color: var(--paper);
+    border-color: var(--wood);
+    box-shadow: 0 2px 0 0 var(--wood-deep);
+  }
+  .hero .btn-primary:hover,
+  section.band.ink .btn-primary:hover {
+    background: var(--paper);
+    color: var(--ink);
+    border-color: var(--paper);
+    box-shadow: 0 4px 0 0 var(--wood-deep);
+  }
+
+  /* Button row */
+  .btn-row {
+    display: flex; flex-wrap: wrap; gap: 0.875rem;
+    align-items: center;
+  }
   .skip-link { position: absolute; left: -9999px; top: 0; }
   .skip-link:focus {
     position: fixed; left: 0.75rem; top: 0.75rem; z-index: 100;
@@ -925,15 +995,24 @@
   .contact-form select option { background: var(--ink); color: var(--paper); }
   .contact-form .submit {
     margin-top: 0.5rem;
-    border: 1.5px solid var(--paper);
+    background: var(--wood);
     color: var(--paper);
-    padding: 0.95rem 1.85rem;
+    border: 2px solid var(--wood);
+    padding: 1rem 2rem;
     font-family: var(--serif);
-    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
-    transition: background 0.2s, color 0.2s;
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
+    transition: background 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     justify-self: start;
+    box-shadow: 0 2px 0 0 var(--wood-deep);
+    cursor: pointer;
+    line-height: 1;
   }
-  .contact-form .submit:hover { background: var(--paper); color: var(--ink); }
+  .contact-form .submit:hover {
+    background: var(--paper); color: var(--ink); border-color: var(--paper);
+    box-shadow: 0 4px 0 0 var(--wood-deep);
+    transform: translateY(-1px);
+  }
+  .contact-form .submit:active { transform: translateY(1px); box-shadow: 0 0 0 0 var(--wood-deep); }
 
   /* ─────────────────────────  FOOTER  ───────────────────────── */
   footer.site {
@@ -1132,10 +1211,10 @@
       </div>
 
       <div class="foot">
-        <div class="links">
-          <a class="link-underline" href="#work">See the work</a>
-          <a class="link-underline" href="tel:+15868501229">(586) 850-1229</a>
-          <a class="link-underline" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="#contact">Get a quote <span class="arr">→</span></a>
+          <a class="btn" href="#work">See the work <span class="arr">→</span></a>
+          <a class="link-underline" href="tel:+15868501229" style="margin-left:0.5rem; color:rgba(239,230,184,0.85);">(586) 850-1229</a>
         </div>
         <span class="meta-r" style="font-size:0.7rem; letter-spacing:0.05em;">Drawn &amp; built by hand</span>
       </div>
@@ -1228,7 +1307,7 @@
           </p>
           <!-- TODO_IAN: About/bio paragraph from Ian -->
           <div class="more">
-            <a class="link-underline" href="#contact" style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;font-weight:700;">Get in touch →</a>
+            <a class="btn btn-primary" href="#contact">Start a conversation <span class="arr">→</span></a>
           </div>
         </div>
       </div>
@@ -1285,17 +1364,17 @@
 
       <div class="work-grid">
         <figure class="tile-a">
-          <a href="#" data-lightbox="images/projects/wood-flooring-drama-shot.webp" data-title="Wide-plank hardwood" data-meta="Flooring">
-            <img src="images/projects/wood-flooring-drama-shot.webp" alt="Wide-plank hardwood flooring with sun coming through" loading="lazy" width="1080" height="1350" />
-            <!-- TODO_IAN: Replace with hi-res photo of hardwood drama shot -->
+          <a href="#" data-project="wood-flooring" data-title="Wide-plank flooring" data-meta="Flooring">
+            <img src="images/projects/wood-flooring-drama-shot.webp" alt="Wide-plank LVP flooring run through a hallway" loading="lazy" width="1080" height="1350" />
+            <!-- TODO_IAN: Replace with hi-res photo of finished flooring -->
             <figcaption>
               <div class="meta"><span class="num">№ 01</span><span class="cat">Flooring</span></div>
-              <span class="ttl">Wide-plank hardwood</span>
+              <span class="ttl">Wide-plank flooring</span>
             </figcaption>
           </a>
         </figure>
         <figure class="tile-b">
-          <a href="#" data-lightbox="images/projects/stairway-after.webp" data-title="Stair railing rebuild" data-meta="Finish & Trim">
+          <a href="#" data-project="stairway" data-title="Stair railing rebuild" data-meta="Finish & Trim">
             <img src="images/projects/stairway-after.webp" alt="Refinished staircase with new dark treads and white risers" loading="lazy" width="1080" height="1350" />
             <!-- TODO_IAN: Replace with hi-res photo of staircase millwork -->
             <figcaption>
@@ -1305,7 +1384,7 @@
           </a>
         </figure>
         <figure class="tile-c">
-          <a href="#" data-lightbox="images/projects/tile-work-and-lit-cabinet.webp" data-title="Lit cabinetry & tile" data-meta="Kitchen & Bath">
+          <a href="#" data-project="tile-cabinet" data-title="Lit cabinetry & tile" data-meta="Kitchen & Bath">
             <img src="images/projects/tile-work-and-lit-cabinet.webp" alt="Backlit display cabinet with tile work" loading="lazy" width="1440" height="1440" />
             <!-- TODO_IAN: Replace with hi-res photo of lit cabinet and tile -->
             <figcaption>
@@ -1315,9 +1394,9 @@
           </a>
         </figure>
         <figure class="tile-d">
-          <a href="#" data-lightbox="images/projects/dock-in-progress-onto-boat.webp" data-title="Lake St. Clair dock" data-meta="Exterior">
-            <img src="images/projects/dock-in-progress-onto-boat.webp" alt="Custom-built dock extending out to a boat slip on Lake St. Clair" loading="lazy" width="1080" height="1440" />
-            <!-- TODO_IAN: Replace with hi-res photo of lakefront dock build -->
+          <a href="#" data-project="dock" data-title="Lake St. Clair dock" data-meta="Exterior">
+            <img src="images/projects/dock-stairs.webp" alt="Finished white-railed dock stairs leading to Lake St. Clair" loading="lazy" width="1080" height="1440" />
+            <!-- TODO_IAN: Replace with hi-res photo of lakefront dock -->
             <figcaption>
               <div class="meta"><span class="num">№ 04</span><span class="cat">Exterior</span></div>
               <span class="ttl">Lake St. Clair dock</span>
@@ -1325,8 +1404,8 @@
           </a>
         </figure>
         <figure class="tile-e">
-          <a href="#" data-lightbox="images/projects/closet-system.webp" data-title="Closet system" data-meta="Millwork">
-            <img src="images/projects/closet-system.webp" alt="Custom closet shelving and hanging rods" loading="lazy" width="1080" height="1350" />
+          <a href="#" data-project="closet-system" data-title="Closet system" data-meta="Millwork">
+            <img src="images/projects/closet-system.webp" alt="Custom closet shelving and door-mounted spice rack" loading="lazy" width="1080" height="1350" />
             <!-- TODO_IAN: Replace with hi-res photo of closet system -->
             <figcaption>
               <div class="meta"><span class="num">№ 05</span><span class="cat">Millwork</span></div>
@@ -1335,7 +1414,7 @@
           </a>
         </figure>
         <figure class="tile-f">
-          <a href="#" data-lightbox="images/projects/bathroom-after.webp" data-title="Full bath remodel" data-meta="Kitchen & Bath">
+          <a href="#" data-project="bathroom" data-title="Full bath remodel" data-meta="Kitchen & Bath">
             <img src="images/projects/bathroom-after.webp" alt="Renovated bathroom with new tile and fixtures" loading="lazy" width="1080" height="801" />
             <!-- TODO_IAN: Replace with hi-res photo of finished bathroom -->
             <figcaption>
@@ -1765,15 +1844,72 @@
     }, 6000);
   })();
 
-  // ─────────────────────────  LIGHTBOX  ─────────────────────────
+  // ─────────────────────────  LIGHTBOX (per-project galleries)  ─────────────────────────
   (function () {
-    const triggers = document.querySelectorAll("[data-lightbox]");
+    // Photo gallery for each project. The "after" / featured shot leads, then before,
+    // then process and detail shots. Captions describe the moment in the build.
+    const projects = {
+      "wood-flooring": {
+        title: "Wide-plank flooring",
+        meta:  "Flooring",
+        photos: [
+          { src: "images/projects/wood-flooring-drama-shot.webp", caption: "Finished hallway"      },
+          { src: "images/projects/wood-flooring2.webp",            caption: "Adjoining room"       },
+          { src: "images/projects/wood-flooring1.webp",            caption: "Through louver doors" },
+          { src: "images/projects/wood-flooring-after.webp",       caption: "After"                },
+          { src: "images/projects/wood-flooring-before.webp",      caption: "Before"               },
+          { src: "images/projects/wood-flooring-process.webp",     caption: "Install in progress"  },
+        ],
+      },
+      "stairway": {
+        title: "Stair railing rebuild",
+        meta:  "Finish & Trim",
+        photos: [
+          { src: "images/projects/stairway-after.webp",     caption: "Finished staircase"        },
+          { src: "images/projects/stairway-railing1.webp",  caption: "Railing detail — primary" },
+          { src: "images/projects/stairway-railing2.webp",  caption: "Railing detail — landing" },
+          { src: "images/projects/stairway-before.webp",    caption: "Before"                   },
+        ],
+      },
+      "tile-cabinet": {
+        title: "Lit cabinetry & tile",
+        meta:  "Kitchen & Bath",
+        photos: [
+          { src: "images/projects/tile-work-and-lit-cabinet.webp", caption: "Lit display cabinet with tile work" },
+        ],
+      },
+      "dock": {
+        title: "Lake St. Clair dock",
+        meta:  "Exterior",
+        photos: [
+          { src: "images/projects/dock-stairs.webp",                 caption: "Finished dock stairs"      },
+          { src: "images/projects/dock-in-progress-onto-boat.webp",  caption: "Boat ramp in progress"     },
+          { src: "images/projects/dock-in-progress.webp",            caption: "Stair frame in progress"   },
+        ],
+      },
+      "closet-system": {
+        title: "Custom closet system",
+        meta:  "Millwork",
+        photos: [
+          { src: "images/projects/closet-system.webp",          caption: "Finished closet — open" },
+          { src: "images/projects/closet-system-closeup.webp",  caption: "Shelving detail"        },
+          { src: "images/projects/closet-system-closeup2.webp", caption: "Door-mounted spice rack" },
+          { src: "images/projects/closet-system-before.webp",   caption: "Before"                 },
+        ],
+      },
+      "bathroom": {
+        title: "Full bath remodel",
+        meta:  "Kitchen & Bath",
+        photos: [
+          { src: "images/projects/bathroom-after.webp",   caption: "Finished bath" },
+          { src: "images/projects/bathroom-during.webp",  caption: "Mid-build"     },
+          { src: "images/projects/bathroom-before.webp",  caption: "Before"        },
+        ],
+      },
+    };
+
+    const triggers = document.querySelectorAll("[data-project]");
     if (!triggers.length) return;
-    const items = Array.from(triggers).map((t) => ({
-      src:   t.getAttribute("data-lightbox"),
-      title: t.getAttribute("data-title") || "",
-      meta:  t.getAttribute("data-meta")  || "",
-    }));
     const lb     = document.getElementById("lightbox");
     const img    = document.getElementById("lb-img");
     const ttl    = document.getElementById("lb-title");
@@ -1781,18 +1917,28 @@
     const prev   = document.getElementById("lb-prev");
     const next   = document.getElementById("lb-next");
     const close  = document.getElementById("lb-close");
+
+    let active = null;  // current project
     let idx = 0;
 
     function show(i) {
-      idx = (i + items.length) % items.length;
-      const it = items[idx];
-      img.src = it.src;
-      img.alt = it.title || "";
-      ttl.textContent  = it.title;
-      meta.textContent = it.meta + "  ·  " + (idx + 1) + " / " + items.length;
+      if (!active) return;
+      const photos = active.photos;
+      idx = (i + photos.length) % photos.length;
+      const p = photos[idx];
+      img.src = p.src;
+      img.alt = (active.title + " — " + p.caption);
+      ttl.textContent  = active.title;
+      meta.textContent = p.caption + "  ·  " + (idx + 1) + " / " + photos.length;
+      // Hide nav arrows on single-photo projects
+      const single = photos.length <= 1;
+      prev.style.display = single ? "none" : "";
+      next.style.display = single ? "none" : "";
     }
-    function open(i) {
-      show(i);
+    function open(slug) {
+      active = projects[slug];
+      if (!active) return;
+      show(0);
       lb.classList.add("open");
       document.body.classList.add("lb-open");
       close.focus();
@@ -1801,10 +1947,14 @@
       lb.classList.remove("open");
       document.body.classList.remove("lb-open");
       img.src = "";
+      active = null;
     }
 
-    triggers.forEach((t, i) => {
-      t.addEventListener("click", (e) => { e.preventDefault(); open(i); });
+    triggers.forEach((t) => {
+      t.addEventListener("click", (e) => {
+        e.preventDefault();
+        open(t.getAttribute("data-project"));
+      });
     });
     prev.addEventListener("click", () => show(idx - 1));
     next.addEventListener("click", () => show(idx + 1));
