@@ -1206,7 +1206,7 @@
         <p class="eyebrow on-dark">Ian O'Ray &middot; Design Build &amp; Renovate</p>
         <h1 class="display-lg">Custom carpentry,<br/>finished by hand.</h1>
         <p class="lede">
-          I'm Ian. I run a one-person carpentry shop on the lake side of Metro Detroit — Grosse Pointe, the lakeshore, and the neighborhoods nearby. The person who quotes the project is the person who builds it.
+          I'm Ian. I'm a one-person carpentry business working the lake side of Metro Detroit — Grosse Pointe, the lakeshore, and the neighborhoods nearby. I work in your home, not a faraway shop. The person who quotes the project is the person who builds it.
         </p>
       </div>
 
@@ -1226,7 +1226,7 @@
     <div class="container">
       <div class="row">
         <div>
-          <p class="eyebrow">The shop</p>
+          <p class="eyebrow">The work</p>
           <p class="sheet-num" style="margin-top:0.6rem;">№ 01</p>
         </div>
         <div>
@@ -1290,7 +1290,7 @@
       <div class="meet">
         <figure class="portrait">
           <img src="images/portrait/ian-oray.webp" alt="Ian O'Ray, Design Build & Renovate" loading="lazy" width="960" height="958" />
-          <!-- TODO_IAN: Replace with hi-res studio portrait -->
+          <!-- TODO_IAN: Replace with hi-res portrait -->
           <figcaption>
             <span class="l">Owner &amp; carpenter</span>
             <span class="r">Ian O'Ray</span>
@@ -1432,17 +1432,17 @@
     <div class="container">
       <div class="section-head">
         <div>
-          <p class="eyebrow">From the shop</p>
+          <p class="eyebrow">On the jobsite</p>
           <h2 class="display-lg">Process shots.</h2>
         </div>
       </div>
       <div class="shop-strip">
-        <figure><img src="images/projects/patio-corner-joinery.jpg" alt="Cedar patio corner being assembled with biscuit joinery" loading="lazy" width="1080" height="1439" /></figure>
-        <figure><img src="images/projects/gazebo-pre-roof.jpg" alt="Gazebo framing before the roof goes on" loading="lazy" width="1080" height="810" /></figure>
-        <figure><img src="images/projects/wood-flooring-process.jpg" alt="Hardwood flooring being laid" loading="lazy" width="1080" height="1350" /></figure>
-        <figure><img src="images/projects/dock-in-progress.jpg" alt="Dock build in progress on Lake St. Clair" loading="lazy" width="1080" height="1440" /></figure>
-        <figure><img src="images/projects/closet-system-closeup2.jpg" alt="Custom closet shelving close up" loading="lazy" width="1080" height="1350" /></figure>
-        <figure><img src="images/projects/patio-corner-glue.jpg" alt="Glue-up on a cedar patio corner" loading="lazy" width="1080" height="1440" /></figure>
+        <figure><a href="#" data-project="shop" data-start="0" aria-label="Cedar patio corner — open in lightbox"><img src="images/projects/patio-corner-joinery.webp" alt="Cedar patio corner being assembled with biscuit joinery" loading="lazy" width="1080" height="1439" /></a></figure>
+        <figure><a href="#" data-project="shop" data-start="1" aria-label="Gazebo framing — open in lightbox"><img src="images/projects/gazebo-pre-roof.webp" alt="Gazebo framing before the roof goes on" loading="lazy" width="1080" height="810" /></a></figure>
+        <figure><a href="#" data-project="shop" data-start="2" aria-label="Flooring install — open in lightbox"><img src="images/projects/wood-flooring-process.webp" alt="Flooring install in progress" loading="lazy" width="1080" height="1350" /></a></figure>
+        <figure><a href="#" data-project="shop" data-start="3" aria-label="Dock build — open in lightbox"><img src="images/projects/dock-in-progress.webp" alt="Dock build in progress on Lake St. Clair" loading="lazy" width="1080" height="1440" /></a></figure>
+        <figure><a href="#" data-project="shop" data-start="4" aria-label="Closet shelving close up — open in lightbox"><img src="images/projects/closet-system-closeup2.webp" alt="Custom closet shelving close up" loading="lazy" width="1080" height="1350" /></a></figure>
+        <figure><a href="#" data-project="shop" data-start="5" aria-label="Glue-up on patio corner — open in lightbox"><img src="images/projects/patio-corner-glue.webp" alt="Glue-up on a cedar patio corner" loading="lazy" width="1080" height="1440" /></a></figure>
       </div>
       <!-- TODO_IAN: Replace with hi-res process photos -->
     </div>
@@ -1662,7 +1662,7 @@
               <a class="value md" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
             </li>
             <li>
-              <p class="eyebrow label">Shop</p>
+              <p class="eyebrow label">Based in</p>
               <span style="color:rgba(239,230,184,0.8); font-size:0.9375rem;">St. Clair Shores, MI</span>
             </li>
           </ul>
@@ -1762,7 +1762,7 @@
   <div class="container">
     <div class="nav-band">
       <div>
-        <p class="eyebrow">Studio</p>
+        <p class="eyebrow">Sections</p>
         <ul>
           <li><a href="#work">Work</a></li>
           <li><a href="#services">Services</a></li>
@@ -1906,6 +1906,18 @@
           { src: "images/projects/bathroom-before.webp",  caption: "Before"        },
         ],
       },
+      "shop": {
+        title: "On the jobsite",
+        meta:  "Process",
+        photos: [
+          { src: "images/projects/patio-corner-joinery.webp", caption: "Patio corner — biscuit joinery" },
+          { src: "images/projects/gazebo-pre-roof.webp",      caption: "Gazebo framing, pre-roof"       },
+          { src: "images/projects/wood-flooring-process.webp",caption: "Flooring install in progress"   },
+          { src: "images/projects/dock-in-progress.webp",     caption: "Dock build on Lake St. Clair"   },
+          { src: "images/projects/closet-system-closeup2.webp", caption: "Closet shelving detail"      },
+          { src: "images/projects/patio-corner-glue.webp",    caption: "Patio corner glue-up"          },
+        ],
+      },
     };
 
     const triggers = document.querySelectorAll("[data-project]");
@@ -1935,10 +1947,11 @@
       prev.style.display = single ? "none" : "";
       next.style.display = single ? "none" : "";
     }
-    function open(slug) {
+    function open(slug, start) {
       active = projects[slug];
       if (!active) return;
-      show(0);
+      const startIdx = Math.max(0, Math.min(active.photos.length - 1, parseInt(start, 10) || 0));
+      show(startIdx);
       lb.classList.add("open");
       document.body.classList.add("lb-open");
       close.focus();
@@ -1953,7 +1966,7 @@
     triggers.forEach((t) => {
       t.addEventListener("click", (e) => {
         e.preventDefault();
-        open(t.getAttribute("data-project"));
+        open(t.getAttribute("data-project"), t.getAttribute("data-start"));
       });
     });
     prev.addEventListener("click", () => show(idx - 1));
