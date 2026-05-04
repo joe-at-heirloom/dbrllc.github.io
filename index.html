@@ -569,6 +569,69 @@
     .credo .pillar h3 { font-size: 1.5rem; }
   }
 
+  /* ─────────────────────────  MANIFESTO  ───────────────────────── */
+  .manifesto { padding: clamp(3.5rem, 7vw, 6.5rem) 0; }
+  .manifesto .head {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem;
+    border-bottom: 2px solid rgba(239, 230, 184, 0.25);
+    padding-bottom: 1.25rem;
+  }
+  .manifesto .head .eyebrow { color: rgba(239, 230, 184, 0.65); }
+  .manifesto .head .meta {
+    font-family: var(--mono);
+    font-size: 0.7rem; letter-spacing: 0.04em;
+    color: rgba(239, 230, 184, 0.5);
+  }
+  .manifesto-list {
+    margin: 0; padding: 0; list-style: none;
+  }
+  .manifesto-list li {
+    display: flex; align-items: baseline; gap: clamp(0.875rem, 2vw, 1.75rem);
+    padding: clamp(0.875rem, 2.4vw, 1.65rem) 0;
+    border-bottom: 2px solid rgba(239, 230, 184, 0.18);
+  }
+  .manifesto-list .num {
+    font-family: var(--mono);
+    font-size: 0.7rem; letter-spacing: 0.04em;
+    color: rgba(239, 230, 184, 0.5);
+    font-weight: 500;
+    flex-shrink: 0;
+    min-width: 2rem;
+  }
+  .manifesto-list .word {
+    font-family: var(--serif);
+    font-weight: 900;
+    font-size: clamp(2.5rem, 11vw, 8.5rem);
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    color: var(--paper);
+    transition: color 0.4s ease, transform 0.4s ease;
+  }
+  .manifesto-list li:hover .word {
+    color: var(--wood);
+  }
+  .manifesto-list .ext {
+    margin-left: auto;
+    align-self: flex-end;
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(0.875rem, 1.4vw, 1.125rem);
+    color: rgba(239, 230, 184, 0.65);
+    max-width: 16rem;
+    line-height: 1.4;
+    text-align: right;
+    padding-bottom: 0.5rem;
+  }
+  @media (max-width: 720px) { .manifesto-list .ext { display: none; } }
+  .manifesto-tail {
+    margin-top: 1.75rem;
+    font-style: italic;
+    font-size: clamp(1rem, 1.4vw, 1.1875rem);
+    color: rgba(239, 230, 184, 0.7);
+    line-height: 1.5;
+  }
+
   /* ─────────────────────────  PROCESS  ───────────────────────── */
   .process { display: grid; grid-template-columns: 1fr; gap: 0; }
   @media (min-width: 720px) {
@@ -1298,6 +1361,39 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  MANIFESTO  ───────────────────────── -->
+  <section class="band ink manifesto">
+    <div class="container">
+      <div class="head">
+        <p class="eyebrow">The work, in four verbs</p>
+        <span class="meta">№ 02 / Manifesto</span>
+      </div>
+      <ol class="manifesto-list">
+        <li>
+          <span class="num">01</span>
+          <span class="word">Measure.</span>
+          <span class="ext">Take the room as it is &mdash; rough opening, out-of-square walls, every detail.</span>
+        </li>
+        <li>
+          <span class="num">02</span>
+          <span class="word">Draw.</span>
+          <span class="ext">A plan you can read &mdash; what goes where, what it costs.</span>
+        </li>
+        <li>
+          <span class="num">03</span>
+          <span class="word">Mill.</span>
+          <span class="ext">Joinery and millwork built to size, on site or off.</span>
+        </li>
+        <li>
+          <span class="num">04</span>
+          <span class="word">Install.</span>
+          <span class="ext">Finished, fit, and cleaned up before I leave.</span>
+        </li>
+      </ol>
+      <p class="manifesto-tail">Same hands. Start to finish.</p>
     </div>
   </section>
 
