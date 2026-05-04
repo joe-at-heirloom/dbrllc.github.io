@@ -27,16 +27,18 @@ python3 -m http.server 4322
 
 GitHub Pages is configured to serve from `main` branch root. Pushes to `main` deploy automatically within ~1 minute.
 
-### Custom domain
+### Custom domain (not set up yet)
 
-The `CNAME` file points GitHub Pages at `designbuildrenovate.com`. To activate:
+No domain has been purchased. The site currently serves at the GitHub Pages URL.
 
-1. At your DNS provider, add an A record (apex) or CNAME (subdomain) pointing at GitHub Pages:
+When a domain is purchased:
+
+1. Create a `CNAME` file at the repo root containing the domain on a single line.
+2. At the DNS provider, add either an A record (apex) or CNAME (subdomain) pointing at GitHub Pages:
    - Apex: A records to `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
    - `www`: CNAME to `joe-at-heirloom.github.io`
-2. In repo Settings → Pages, enter the domain and check **Enforce HTTPS** once the certificate provisions.
-
-If using a different domain, edit the `CNAME` file and the canonical/og-url meta tags in `index.html`.
+3. In repo Settings → Pages, enter the domain and check **Enforce HTTPS** once the certificate provisions.
+4. Update the `canonical`, `og:url`, and Plausible `data-domain` references in `index.html` to match.
 
 ## Form
 
@@ -46,7 +48,7 @@ To get a Slack/SMS/Discord notification on each submission, set up a Zapier or M
 
 ## Analytics
 
-[Plausible](https://plausible.io) is wired up via a defer script tag — no cookies, no banner needed. Sign up at plausible.io, add `designbuildrenovate.com` as a site, and the existing script tag will start reporting.
+[Plausible](https://plausible.io) is wired up via a defer script tag — no cookies, no banner needed. The `data-domain` attribute currently references the placeholder `designbuildrenovate.com`. Once a real domain is set up, update that attribute, sign up at plausible.io, add the domain as a site, and the script will start reporting.
 
 ## Outstanding items
 
