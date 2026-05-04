@@ -346,6 +346,90 @@
     .credo .pillar h3 { font-size: 1.5rem; }
   }
 
+  /* ─────────────────────────  PROCESS  ───────────────────────── */
+  .process { display: grid; grid-template-columns: 1fr; gap: 0; }
+  @media (min-width: 720px) {
+    .process {
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+    }
+  }
+  .process .step {
+    padding: 2rem 0;
+    border-top: 2px solid var(--ink);
+  }
+  @media (min-width: 720px) {
+    .process .step { padding: 2.25rem 1.75rem; border-top: 0; }
+    .process .step + .step { border-left: 2px solid var(--ink); }
+    .process .step:first-child { padding-left: 0; }
+    .process .step:last-child  { padding-right: 0; }
+  }
+  .process .step .num {
+    font-family: var(--mono); color: var(--wood);
+    font-size: 0.7rem; letter-spacing: 0.04em; display: block;
+    margin-bottom: 0.6rem; font-weight: 600;
+  }
+  .process .step h3 {
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.5rem, 2.4vw, 2rem); margin: 0;
+    line-height: 1.1; letter-spacing: -0.018em;
+  }
+  .process .step p {
+    margin: 1rem 0 0; color: var(--ink-muted);
+    font-size: 0.9375rem; line-height: 1.65; max-width: 22rem;
+  }
+
+  /* ─────────────────────────  FAQ  ───────────────────────── */
+  .faq {
+    display: grid; grid-template-columns: 1fr; gap: 0;
+    border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+  }
+  .faq details {
+    border-bottom: 1px solid rgba(26, 20, 16, 0.25);
+    padding: 1.5rem 0;
+  }
+  .faq details:last-child { border-bottom: 0; }
+  .faq summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1.5rem;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1.0625rem, 1.6vw, 1.25rem);
+    line-height: 1.3; letter-spacing: -0.012em;
+    color: var(--ink);
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+"; font-family: var(--mono); font-weight: 400;
+    font-size: 1.5rem; color: var(--wood);
+    line-height: 1;
+  }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p {
+    margin: 1rem 0 0; max-width: 48rem;
+    color: var(--ink-muted); font-size: 0.9375rem; line-height: 1.7;
+  }
+
+  /* ─────────────────────────  SHOP STRIP  ───────────────────────── */
+  .shop-strip {
+    display: grid; gap: 0.75rem;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (min-width: 720px) {
+    .shop-strip { grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+  }
+  .shop-strip figure {
+    margin: 0; aspect-ratio: 1 / 1;
+    border: 2px solid var(--ink); overflow: hidden;
+    position: relative;
+  }
+  .shop-strip figure img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.6s ease;
+    filter: saturate(0.95);
+  }
+  .shop-strip figure:hover img { transform: scale(1.06); }
+
   /* ─────────────────────────  ABOUT / IAN  ───────────────────────── */
   .meet { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: start; }
   @media (min-width: 880px) { .meet { grid-template-columns: 5fr 7fr; gap: 3.5rem; } }
@@ -831,7 +915,7 @@
         <a href="#work">Work</a>
         <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
         <a class="phone" href="tel:+15868501229">(586) 850-1229</a>
       </nav>
@@ -860,8 +944,9 @@
     <a href="#work"><span class="sheet-num">01</span><span class="display">Work</span></a>
     <a href="#services"><span class="sheet-num">02</span><span class="display">Services</span></a>
     <a href="#about"><span class="sheet-num">03</span><span class="display">About</span></a>
-    <a href="#testimonials"><span class="sheet-num">04</span><span class="display">Testimonials</span></a>
-    <a href="#contact"><span class="sheet-num">05</span><span class="display">Contact</span></a>
+    <a href="#faq"><span class="sheet-num">04</span><span class="display">FAQ</span></a>
+    <a href="#testimonials"><span class="sheet-num">05</span><span class="display">Testimonials</span></a>
+    <a href="#contact"><span class="sheet-num">06</span><span class="display">Contact</span></a>
     <div class="divider"></div>
     <a href="tel:+15868501229" style="font-size:1.0625rem;color:var(--ink);">(586) 850-1229</a>
     <a href="mailto:designbr.llc@gmail.com" style="font-size:1.0625rem;color:var(--ink-muted);">designbr.llc@gmail.com</a>
@@ -938,8 +1023,37 @@
     </div>
   </section>
 
+  <!-- ─────────────────────────  PROCESS  ───────────────────────── -->
+  <section class="band soft">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 class="display-lg">Three steps.</h2>
+        </div>
+      </div>
+      <div class="process">
+        <div class="step">
+          <span class="num">№ 01 &middot; Walk-through</span>
+          <h3>Take a look together.</h3>
+          <p>I come out, measure the space, and listen to what you're picturing. No charge, no pressure.</p>
+        </div>
+        <div class="step">
+          <span class="num">№ 02 &middot; Quote</span>
+          <h3>Plain-English estimate.</h3>
+          <p>A written quote with materials, scope, and timing. Itemized so you can see what's what. What I bid is what you pay.</p>
+        </div>
+        <div class="step">
+          <span class="num">№ 03 &middot; Build</span>
+          <h3>Same hands, start to finish.</h3>
+          <p>I do the work. You get one number to call with questions. Daily clean-up at the end of every shift.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ─────────────────────────  ABOUT  ───────────────────────── -->
-  <section class="band soft" id="about">
+  <section class="band paper" id="about">
     <div class="container">
       <div class="meet">
         <figure class="portrait">
@@ -969,7 +1083,7 @@
   </section>
 
   <!-- ─────────────────────────  SERVICES  ───────────────────────── -->
-  <section class="band paper" id="services">
+  <section class="band soft" id="services">
     <div class="container">
       <div class="section-head">
         <div>
@@ -1006,7 +1120,7 @@
   </section>
 
   <!-- ─────────────────────────  WORK  ───────────────────────── -->
-  <section class="band soft" id="work">
+  <section class="band paper" id="work">
     <div class="container">
       <div class="section-head">
         <div>
@@ -1078,6 +1192,27 @@
           </a>
         </figure>
       </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  SHOP STRIP  ───────────────────────── -->
+  <section class="band soft">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">From the shop</p>
+          <h2 class="display-lg">Process shots.</h2>
+        </div>
+      </div>
+      <div class="shop-strip">
+        <figure><img src="images/projects/patio-corner-joinery.jpg" alt="Cedar patio corner being assembled with biscuit joinery" loading="lazy"/></figure>
+        <figure><img src="images/projects/gazebo-pre-roof.jpg" alt="Gazebo framing before the roof goes on" loading="lazy"/></figure>
+        <figure><img src="images/projects/wood-flooring-process.jpg" alt="Hardwood flooring being laid" loading="lazy"/></figure>
+        <figure><img src="images/projects/dock-in-progress.jpg" alt="Dock build in progress on Lake St. Clair" loading="lazy"/></figure>
+        <figure><img src="images/projects/closet-system-closeup2.jpg" alt="Custom closet shelving close up" loading="lazy"/></figure>
+        <figure><img src="images/projects/patio-corner-glue.jpg" alt="Glue-up on a cedar patio corner" loading="lazy"/></figure>
+      </div>
+      <!-- TODO_IAN: Replace with hi-res process photos -->
     </div>
   </section>
 
@@ -1185,6 +1320,44 @@
           </div>
         </article>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────────────────────  FAQ  ───────────────────────── -->
+  <section class="band soft" id="faq">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Common questions</p>
+          <h2 class="display-lg">Things people ask.</h2>
+        </div>
+      </div>
+      <div class="faq">
+        <details>
+          <summary>What size projects do you take?</summary>
+          <p>Most of my work runs from a single room — a kitchen refresh, a stair rebuild, a closet system — to a full ground-floor remodel. Smallest jobs tend to be a built-in or a mantel. Largest are kitchen-and-bath combinations that take a couple of months. If you're not sure whether a project is a fit, ask.</p>
+        </details>
+        <details>
+          <summary>Do you handle design as well as the build?</summary>
+          <p>Yes. For most projects I'll sketch the work and walk you through materials before quoting. For larger renovations where you're working with an architect or interior designer, I'll build to their drawings. Either way you get one carpenter on site.</p>
+        </details>
+        <details>
+          <summary>How long does a kitchen take?</summary>
+          <p>A refacing or partial refresh is usually 2–4 weeks. A full kitchen remodel — cabinets out, plumbing and electrical coordinated, tile, trim, finish — runs 6–10 weeks depending on scope and material lead times. I'll give you a real timeline with the quote, not a placeholder.</p>
+        </details>
+        <details>
+          <summary>What about permits and inspections?</summary>
+          <p>I pull permits when the work requires them — most kitchen remodels, anything structural, any plumbing or electrical changes. If a job doesn't need a permit, I'll tell you that too. I work with electricians and plumbers I've used for years for the parts of a project that need licensed trades.</p>
+        </details>
+        <details>
+          <summary>How does payment work?</summary>
+          <p>A deposit at the start, a progress payment when materials arrive on site, and the balance at completion. Larger projects get a milestone schedule written into the quote. No surprise charges — if scope changes mid-project, we agree on the change in writing before I do the work.</p>
+        </details>
+        <details>
+          <summary>Where do you work?</summary>
+          <p>Grosse Pointe (all five communities), Harrison Township, St. Clair Shores, Macomb, Clinton Township, Chesterfield, Sterling Heights, Rochester Hills, and Birmingham. If you're outside that zone but in Metro Detroit, ask anyway.</p>
+        </details>
       </div>
     </div>
   </section>
@@ -1358,6 +1531,7 @@
           <li><a href="#work">Work</a></li>
           <li><a href="#services">Services</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#faq">FAQ</a></li>
           <li><a href="#testimonials">Testimonials</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
