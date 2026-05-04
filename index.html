@@ -260,7 +260,7 @@
   }
   .btn:hover { background: var(--ink); color: var(--paper); }
   .btn:active { transform: translateY(1px); }
-  .btn .arr { font-family: var(--mono); font-weight: 500; transition: transform 0.2s ease; }
+  .btn .arr { transition: transform 0.2s ease; }
   .btn:hover .arr { transform: translateX(0.25rem); }
 
   /* Primary: filled chestnut, cream type — pops on cream paper backgrounds */
@@ -320,10 +320,14 @@
     flex-shrink: 0;
     color: currentColor;
   }
-  .icon-row { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .icon-row { display: inline-flex; align-items: center; gap: 0.5rem; flex-wrap: nowrap; }
   .icon-leading {
     display: inline-flex; align-items: center; gap: 0.6rem;
+    flex-wrap: nowrap;
+    min-width: 0;
+    max-width: 100%;
   }
+  .icon-leading > .icon { flex-shrink: 0; }
   .skip-link { position: absolute; left: -9999px; top: 0; }
   .skip-link:focus {
     position: fixed; left: 0.75rem; top: 0.75rem; z-index: 100;
@@ -662,10 +666,15 @@
     .process .step:first-child { padding-left: 0; }
     .process .step:last-child  { padding-right: 0; }
   }
+  .process .step .step-head {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 0.85rem;
+  }
+  .process .step .step-icon { color: var(--wood); }
   .process .step .num {
     font-family: var(--mono); color: var(--wood);
-    font-size: 0.7rem; letter-spacing: 0.04em; display: block;
-    margin-bottom: 0.6rem; font-weight: 600;
+    font-size: 0.7rem; letter-spacing: 0.04em;
+    font-weight: 600;
   }
   .process .step h3 {
     font-family: var(--serif); font-weight: 700;
@@ -784,10 +793,15 @@
     .services-grid > a:nth-child(odd) { border-right: 2px solid var(--ink); }
   }
   .services-grid > a .top {
-    display: flex; justify-content: space-between; align-items: baseline;
+    display: flex; justify-content: space-between; align-items: center;
     border-bottom: 1px solid rgba(26, 20, 16, 0.3);
     padding-bottom: 0.875rem; margin-bottom: 1.75rem;
   }
+  .services-grid > a .svc-icon {
+    color: var(--wood);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .services-grid > a:hover .svc-icon { color: var(--ink); transform: rotate(-4deg); }
   .services-grid > a .top .num {
     font-family: var(--mono); font-size: 0.7rem; color: var(--ink-muted);
   }
@@ -804,6 +818,40 @@
     margin: 1rem 0 0;
     color: var(--ink-muted); font-size: 0.9375rem; line-height: 1.65;
     max-width: 28rem;
+  }
+
+  /* ─────────────────────────  BRANDS STRIP  ───────────────────────── */
+  .brands-strip {
+    margin-top: clamp(2rem, 4vw, 3.5rem);
+    padding-top: clamp(1.5rem, 3vw, 2.25rem);
+    border-top: 2px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+    align-items: baseline;
+  }
+  @media (min-width: 720px) {
+    .brands-strip { grid-template-columns: auto 1fr; gap: 2rem; }
+  }
+  .brands-strip .label {
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    white-space: nowrap;
+  }
+  .brands-strip .list {
+    display: flex; flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+    font-family: var(--serif); font-weight: 700;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    letter-spacing: -0.005em;
+    color: var(--ink-soft);
+  }
+  .brands-strip .list .sep {
+    color: var(--wood);
+    font-weight: 400;
   }
 
   /* ─────────────────────────  WORK GRID  ───────────────────────── */
@@ -972,8 +1020,9 @@
   .testimonials-grid .num {
     font-family: var(--mono);
     font-size: 0.7rem; color: var(--ink-muted);
-    display: block;
+    display: flex; align-items: center; gap: 0.5rem;
   }
+  .testimonials-grid .quote-icon { color: var(--wood); opacity: 0.8; }
   .testimonials-grid blockquote {
     font-family: var(--serif); font-weight: 500;
     font-size: clamp(1.125rem, 1.4vw, 1.3125rem); line-height: 1.4;
@@ -1032,8 +1081,14 @@
     font-family: var(--serif); font-weight: 700; line-height: 1.0;
     margin-top: 0.5rem; display: inline-block; letter-spacing: -0.02em;
   }
-  .contact-grid ul a.value.lg { font-size: 1.875rem; }
-  .contact-grid ul a.value.md { font-size: 1.375rem; word-break: break-all; }
+  .contact-grid ul a.value.lg,
+  .contact-grid ul a.value.md {
+    font-size: clamp(1.125rem, 1.7vw, 1.5rem);
+    overflow-wrap: anywhere;
+    word-break: normal;
+    line-height: 1.15;
+    max-width: 100%;
+  }
 
   /* Contact form */
   .contact-form {
@@ -1279,6 +1334,48 @@
       <path d="M5 12h14"/>
       <path d="m12 5 7 7-7 7"/>
     </symbol>
+    <symbol id="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </symbol>
+    <symbol id="icon-file-text" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/>
+      <path d="M14 2v6h6"/>
+      <path d="M16 13H8"/>
+      <path d="M16 17H8"/>
+      <path d="M10 9H8"/>
+    </symbol>
+    <symbol id="icon-hammer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m15 12-8.4 8.4a2.121 2.121 0 0 1-3-3L12 9"/>
+      <path d="m18 15 4-4"/>
+      <path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/>
+    </symbol>
+    <symbol id="icon-layers" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/>
+      <path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/>
+      <path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/>
+    </symbol>
+    <symbol id="icon-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+      <path d="M7 2v20"/>
+      <path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2Z"/>
+      <path d="M21 15v7"/>
+    </symbol>
+    <symbol id="icon-ruler" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21.3 15.3a2.4 2.4 0 0 1 0 3.4l-2.6 2.6a2.4 2.4 0 0 1-3.4 0L2.7 8.7a2.41 2.41 0 0 1 0-3.4l2.6-2.6a2.4 2.4 0 0 1 3.4 0Z"/>
+      <path d="m14.5 12.5 2-2"/>
+      <path d="m11.5 9.5 2-2"/>
+      <path d="m8.5 6.5 2-2"/>
+      <path d="m17.5 15.5 2-2"/>
+    </symbol>
+    <symbol id="icon-tree" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="m17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17Z"/>
+      <path d="M12 22v-3"/>
+    </symbol>
+    <symbol id="icon-quote" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+      <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" opacity="0.85"/>
+      <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 .985 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" opacity="0.85"/>
+    </symbol>
   </defs>
 </svg>
 
@@ -1363,9 +1460,9 @@
 
       <div class="foot">
         <div class="btn-row">
-          <a class="btn btn-primary" href="#contact">Get a quote <span class="arr">→</span></a>
-          <a class="btn" href="#work">See the work <span class="arr">→</span></a>
-          <a class="link-underline" href="tel:+15868501229" style="margin-left:0.5rem; color:rgba(239,230,184,0.85);">(586) 850-1229</a>
+          <a class="btn btn-primary" href="#contact">Get a quote <svg class="arr icon" width="14" height="14" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
+          <a class="btn" href="#work"><svg class="icon" width="15" height="15" aria-hidden="true"><use href="#icon-eye"/></svg> See the work</a>
+          <a class="link-underline icon-leading" href="tel:+15868501229" style="margin-left:0.5rem; color:rgba(239,230,184,0.85);"><svg class="icon" width="14" height="14" aria-hidden="true"><use href="#icon-phone"/></svg>(586) 850-1229</a>
         </div>
         <span class="meta-r" style="font-size:0.7rem; letter-spacing:0.05em;">Drawn &amp; built by hand</span>
       </div>
@@ -1455,17 +1552,17 @@
       </div>
       <div class="process">
         <div class="step">
-          <span class="num">№ 01 &middot; Walk-through</span>
+          <div class="step-head"><svg class="icon step-icon" width="20" height="20" aria-hidden="true"><use href="#icon-eye"/></svg><span class="num">№ 01 &middot; Walk-through</span></div>
           <h3>Take a look together.</h3>
           <p>I come out, measure the space, and listen to what you're picturing. No charge, no pressure.</p>
         </div>
         <div class="step">
-          <span class="num">№ 02 &middot; Quote</span>
+          <div class="step-head"><svg class="icon step-icon" width="20" height="20" aria-hidden="true"><use href="#icon-file-text"/></svg><span class="num">№ 02 &middot; Quote</span></div>
           <h3>Plain-English estimate.</h3>
           <p>A written quote with materials, scope, and timing. Itemized so you can see what's what. What I bid is what you pay.</p>
         </div>
         <div class="step">
-          <span class="num">№ 03 &middot; Build</span>
+          <div class="step-head"><svg class="icon step-icon" width="20" height="20" aria-hidden="true"><use href="#icon-hammer"/></svg><span class="num">№ 03 &middot; Build</span></div>
           <h3>Same hands, start to finish.</h3>
           <p>I do the work. You get one number to call with questions. Daily clean-up at the end of every shift.</p>
         </div>
@@ -1496,7 +1593,7 @@
           </p>
           <!-- TODO_IAN: About/bio paragraph from Ian -->
           <div class="more">
-            <a class="btn btn-primary" href="#contact">Start a conversation <span class="arr">→</span></a>
+            <a class="btn btn-primary" href="#contact">Start a conversation <svg class="arr icon" width="14" height="14" aria-hidden="true"><use href="#icon-arrow-right"/></svg></a>
           </div>
         </div>
       </div>
@@ -1516,27 +1613,49 @@
 
       <div class="services-grid">
         <a href="?type=Custom%20Millwork%20%26%20Built-Ins#contact">
-          <div class="top"><span class="num">№ 01</span><span class="cat">Interior</span></div>
+          <div class="top">
+            <span class="num">№ 01 &middot; Interior</span>
+            <svg class="icon svc-icon" width="22" height="22" aria-hidden="true"><use href="#icon-layers"/></svg>
+          </div>
           <h3>Custom Millwork &amp; Built-Ins</h3>
           <p>Floating shelves, radiator covers, libraries, mudrooms, closet systems — drawn, milled, and installed.</p>
         </a>
         <a href="?type=Kitchen%20%26%20Bath#contact">
-          <div class="top"><span class="num">№ 02</span><span class="cat">Wet rooms</span></div>
+          <div class="top">
+            <span class="num">№ 02 &middot; Wet rooms</span>
+            <svg class="icon svc-icon" width="22" height="22" aria-hidden="true"><use href="#icon-utensils"/></svg>
+          </div>
           <h3>Kitchen &amp; Bath</h3>
           <p>Refacing through full remodels. Tile, backsplash, venetian plaster, and the millwork that ties the room together.</p>
         </a>
         <a href="?type=Finish%20Carpentry%20%26%20Trim#contact">
-          <div class="top"><span class="num">№ 03</span><span class="cat">Trim</span></div>
+          <div class="top">
+            <span class="num">№ 03 &middot; Trim</span>
+            <svg class="icon svc-icon" width="22" height="22" aria-hidden="true"><use href="#icon-ruler"/></svg>
+          </div>
           <h3>Finish Carpentry &amp; Trim</h3>
           <p>Staircases, base, casing, panel mouldings, doors, and joinery worth standing close to.</p>
         </a>
         <a href="?type=Exterior%20Carpentry#contact">
-          <div class="top"><span class="num">№ 04</span><span class="cat">Outdoor</span></div>
+          <div class="top">
+            <span class="num">№ 04 &middot; Outdoor</span>
+            <svg class="icon svc-icon" width="22" height="22" aria-hidden="true"><use href="#icon-tree"/></svg>
+          </div>
           <h3>Exterior Carpentry</h3>
           <p>Cedar pergolas, gazebos, decks, and docks. Built to weather a Michigan winter.</p>
         </a>
       </div>
-      <div class="rule" aria-hidden="true"></div>
+      <div class="brands-strip">
+        <span class="label">Working with</span>
+        <div class="list">
+          <span>Trex</span><span class="sep">·</span>
+          <span>Schluter</span><span class="sep">·</span>
+          <span>Shaw</span><span class="sep">·</span>
+          <span>CALI</span><span class="sep">·</span>
+          <span>PPG</span><span class="sep">·</span>
+          <span>Cultured Stone</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1795,31 +1914,20 @@
 
       <div class="testimonials-grid">
         <figure>
-          <span class="num">№ 01</span>
+          <span class="num"><svg class="icon quote-icon" width="14" height="14" aria-hidden="true"><use href="#icon-quote"/></svg>№ 01</span>
           <blockquote>&ldquo;This upgrade made the space look so much more open and inviting. Gorgeous job.&rdquo;</blockquote>
           <figcaption>Mikayla Daniel</figcaption>
         </figure>
         <figure>
-          <span class="num">№ 02</span>
+          <span class="num"><svg class="icon quote-icon" width="14" height="14" aria-hidden="true"><use href="#icon-quote"/></svg>№ 02</span>
           <blockquote>&ldquo;They do fantastic work. Highly recommend.&rdquo;</blockquote>
           <figcaption>Chris Nellis</figcaption>
         </figure>
         <figure>
-          <span class="num">№ 03</span>
-          <blockquote>&ldquo;Beautiful update. They will surely enjoy that room.&rdquo;</blockquote>
-          <figcaption>Tina Secreto Provost</figcaption>
+          <span class="num"><svg class="icon quote-icon" width="14" height="14" aria-hidden="true"><use href="#icon-quote"/></svg>№ 03</span>
+          <blockquote>&ldquo;Absolutely beautiful. Fantastic job. It looks amazing.&rdquo;</blockquote>
+          <figcaption>Randy Finch</figcaption>
         </figure>
-      </div>
-
-      <div class="secondary-quotes">
-        <div>
-          <span class="name">Randy Finch</span>
-          <p>&ldquo;Absolutely beautiful. Fantastic job. It looks amazing.&rdquo;</p>
-        </div>
-        <div>
-          <span class="name">Lori StLouis</span>
-          <p>&ldquo;That looks great.&rdquo;</p>
-        </div>
       </div>
 
       <p style="margin-top:2.5rem; font-family: var(--mono); font-size:0.7rem; letter-spacing:0.05em; color:var(--ink-muted);">
