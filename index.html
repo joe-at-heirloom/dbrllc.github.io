@@ -1021,42 +1021,86 @@
   }
   footer.site .top-band {
     border-bottom: 2px solid rgba(239, 230, 184, 0.15);
-    padding: clamp(3rem, 6vw, 5.5rem) 0;
+    padding: clamp(2.5rem, 5vw, 5rem) 0;
   }
   footer.site .top-band .row {
-    display: grid; grid-template-columns: 1fr; gap: 2rem; align-items: end;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    align-items: start;
   }
-  @media (min-width: 880px) { footer.site .top-band .row { grid-template-columns: 8fr 4fr; gap: 2rem; } }
+  @media (min-width: 880px) {
+    footer.site .top-band .row {
+      grid-template-columns: 8fr 4fr;
+      gap: 2rem;
+      align-items: end;
+    }
+  }
   footer.site .top-band .signoff {
     font-size: clamp(1.875rem, 5.5vw, 4.25rem);
-    line-height: 1; margin: 1.25rem 0 0;
+    line-height: 1.02; margin: 1rem 0 0;
     letter-spacing: -0.02em;
   }
-  footer.site .top-band .right { padding-left: 0; border-left: 0; }
-  @media (min-width: 880px) {
-    footer.site .top-band .right { padding-left: 2rem; border-left: 2px solid rgba(239, 230, 184, 0.15); }
+  footer.site .top-band .right {
+    padding-left: 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(239, 230, 184, 0.15);
+    border-left: 0;
   }
-  footer.site .top-band .right p { color: rgba(239, 230, 184, 0.75); font-size: 0.9375rem; line-height: 1.65; }
+  @media (min-width: 880px) {
+    footer.site .top-band .right {
+      padding-left: 2rem;
+      padding-top: 0;
+      border-top: 0;
+      border-left: 2px solid rgba(239, 230, 184, 0.15);
+    }
+  }
+  footer.site .top-band .right p {
+    color: rgba(239, 230, 184, 0.75);
+    font-size: 0.9375rem; line-height: 1.6;
+    max-width: 36rem;
+  }
+
   footer.site .nav-band {
     border-bottom: 2px solid rgba(239, 230, 184, 0.15);
-    padding: clamp(2.5rem, 5vw, 3.5rem) 0;
-    display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem 2rem;
+    padding: clamp(2.25rem, 5vw, 3.5rem) 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
   }
-  @media (min-width: 768px) { footer.site .nav-band { grid-template-columns: repeat(4, 1fr); } }
+  @media (min-width: 520px) {
+    footer.site .nav-band { grid-template-columns: 1fr 1fr; gap: 2.25rem 1.75rem; }
+  }
+  @media (min-width: 880px) {
+    footer.site .nav-band { grid-template-columns: repeat(4, 1fr); gap: 2.5rem 2rem; }
+  }
   footer.site .nav-band p.eyebrow { color: rgba(239, 230, 184, 0.55); }
-  footer.site .nav-band ul { margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.65rem; }
-  footer.site .nav-band ul a { font-size: 0.9375rem; color: rgba(239, 230, 184, 0.85); }
+  footer.site .nav-band ul {
+    margin-top: 1rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+  }
+  footer.site .nav-band ul a {
+    font-size: 0.9375rem; color: rgba(239, 230, 184, 0.85);
+    word-break: break-word;
+  }
   footer.site .nav-band ul a:hover { color: var(--paper); }
   footer.site .nav-band li.dim { color: rgba(239, 230, 184, 0.6); padding-top: 0.4rem; }
-  footer.site .nav-band p.area { font-size: 0.9375rem; color: rgba(239, 230, 184, 0.75); margin-top: 1.25rem; line-height: 1.65; }
+  footer.site .nav-band p.area {
+    font-size: 0.9375rem; color: rgba(239, 230, 184, 0.75);
+    margin-top: 1rem; line-height: 1.6;
+  }
+
   footer.site .legal {
-    padding: 1.5rem 0;
-    display: flex; flex-direction: column; gap: 0.5rem;
+    padding: 1.25rem 0;
+    display: flex; flex-direction: column; gap: 0.4rem;
     font-family: var(--mono);
     font-size: 0.7rem; letter-spacing: 0.05em;
     color: rgba(239, 230, 184, 0.55);
   }
-  @media (min-width: 768px) { footer.site .legal { flex-direction: row; justify-content: space-between; } }
+  footer.site .legal p { margin: 0; }
+  @media (min-width: 768px) {
+    footer.site .legal { flex-direction: row; justify-content: space-between; padding: 1.5rem 0; }
+  }
 
   /* utility */
   @media (max-width: 767.5px) { .show-md { display: none !important; } }
@@ -1779,8 +1823,9 @@
       <div>
         <p class="eyebrow">Follow</p>
         <ul>
-          <li><a href="https://instagram.com/design_builder_studio" rel="noopener">Instagram &mdash; @design_builder_studio</a></li>
+          <li><a href="https://instagram.com/design_builder_studio" rel="noopener">Instagram</a></li>
           <li><a href="https://facebook.com/designbr.llc" rel="noopener">Facebook</a></li>
+          <li class="dim" style="font-family: var(--mono); font-size: 0.75rem;">@design_builder_studio</li>
         </ul>
       </div>
       <div>
