@@ -312,6 +312,18 @@
     display: flex; flex-wrap: wrap; gap: 0.875rem;
     align-items: center;
   }
+
+  /* ─────────────────────────  ICONS (Lucide-style, inlined)  ───────────────────────── */
+  .icon {
+    display: inline-block;
+    vertical-align: -0.16em;
+    flex-shrink: 0;
+    color: currentColor;
+  }
+  .icon-row { display: inline-flex; align-items: center; gap: 0.5rem; }
+  .icon-leading {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+  }
   .skip-link { position: absolute; left: -9999px; top: 0; }
   .skip-link:focus {
     position: fixed; left: 0.75rem; top: 0.75rem; z-index: 100;
@@ -1240,6 +1252,36 @@
 
 <a href="#main" class="skip-link">Skip to content</a>
 
+<!-- ─────────────────────────  ICON SPRITE (Lucide)  ─────────────────────────
+     Inlined once; each <use href="#icon-name"/> references a symbol below. -->
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <symbol id="icon-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+    </symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="20" height="16" x="2" y="4" rx="2"/>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+    </symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+      <circle cx="12" cy="10" r="3"/>
+    </symbol>
+    <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+    </symbol>
+    <symbol id="icon-facebook" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+    </symbol>
+    <symbol id="icon-arrow-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M5 12h14"/>
+      <path d="m12 5 7 7-7 7"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- ─────────────────────────────────────────────────────────────  NAV  ───────────────────────────────────────────────────────── -->
 <header class="site" id="site-header">
   <div class="container">
@@ -1801,15 +1843,15 @@
         <div class="right">
           <ul>
             <li>
-              <p class="eyebrow label">Phone</p>
+              <p class="eyebrow label icon-leading"><svg class="icon" width="13" height="13"><use href="#icon-phone"/></svg>Phone</p>
               <a class="value lg" href="tel:+15868501229">(586) 850-1229</a>
             </li>
             <li>
-              <p class="eyebrow label">Email</p>
+              <p class="eyebrow label icon-leading"><svg class="icon" width="13" height="13"><use href="#icon-mail"/></svg>Email</p>
               <a class="value md" href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a>
             </li>
             <li>
-              <p class="eyebrow label">Based in</p>
+              <p class="eyebrow label icon-leading"><svg class="icon" width="13" height="13"><use href="#icon-pin"/></svg>Based in</p>
               <span style="color:rgba(239,230,184,0.8); font-size:0.9375rem;">St. Clair Shores, MI</span>
             </li>
           </ul>
@@ -1916,18 +1958,18 @@
       </div>
       <div>
         <p class="eyebrow">Direct</p>
-        <ul>
-          <li><a href="tel:+15868501229">(586) 850-1229</a></li>
-          <li><a href="mailto:designbr.llc@gmail.com">designbr.llc@gmail.com</a></li>
-          <li class="dim">St. Clair Shores, MI</li>
+        <ul class="icon-list">
+          <li><a href="tel:+15868501229" class="icon-leading"><svg class="icon" width="15" height="15"><use href="#icon-phone"/></svg>(586) 850-1229</a></li>
+          <li><a href="mailto:designbr.llc@gmail.com" class="icon-leading"><svg class="icon" width="15" height="15"><use href="#icon-mail"/></svg>designbr.llc@gmail.com</a></li>
+          <li class="dim icon-leading"><svg class="icon" width="15" height="15"><use href="#icon-pin"/></svg>St. Clair Shores, MI</li>
         </ul>
       </div>
       <div>
         <p class="eyebrow">Follow</p>
-        <ul>
-          <li><a href="https://instagram.com/design_builder_studio" rel="noopener">Instagram</a></li>
-          <li><a href="https://facebook.com/designbr.llc" rel="noopener">Facebook</a></li>
-          <li class="dim" style="font-family: var(--mono); font-size: 0.75rem;">@design_builder_studio</li>
+        <ul class="icon-list">
+          <li><a href="https://instagram.com/design_builder_studio" rel="noopener" class="icon-leading"><svg class="icon" width="17" height="17"><use href="#icon-instagram"/></svg>Instagram</a></li>
+          <li><a href="https://facebook.com/designbr.llc" rel="noopener" class="icon-leading"><svg class="icon" width="17" height="17"><use href="#icon-facebook"/></svg>Facebook</a></li>
+          <li class="dim" style="font-family: var(--mono); font-size: 0.75rem; padding-left: 1.5rem;">@design_builder_studio</li>
         </ul>
       </div>
       <div>
