@@ -173,6 +173,21 @@
   ::selection { background: var(--ink); color: var(--paper); }
   p { margin: 0; }
 
+  /* Lock light scheme — dark-mode auto-translation in mail clients can mangle the cream */
+  html { color-scheme: only light; }
+
+  /* Reduced motion: kill non-essential animation */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .work-grid figure:hover img,
+    .shop-strip figure:hover img { transform: none !important; }
+  }
+
   /* ─────────────────────────  TYPE  ───────────────────────── */
   .display {
     font-family: var(--serif);
@@ -1070,9 +1085,9 @@
   <!-- ─────────────────────────  HERO  ───────────────────────── -->
   <section class="hero" id="top">
     <div class="bg" id="hero-bg">
-      <img src="images/projects/gazebo.webp"                    alt="" class="is-active" loading="eager" fetchpriority="high" />
-      <img src="images/projects/dock-in-progress-onto-boat.webp" alt="" loading="lazy" />
-      <img src="images/projects/wood-flooring-drama-shot.webp"   alt="" loading="lazy" />
+      <img src="images/projects/gazebo.webp"                    alt="" class="is-active" loading="eager" fetchpriority="high" width="640" height="640" />
+      <img src="images/projects/dock-in-progress-onto-boat.webp" alt="" loading="lazy" width="1080" height="1440" />
+      <img src="images/projects/wood-flooring-drama-shot.webp"   alt="" loading="lazy" width="1080" height="1350" />
       <!-- TODO_IAN: Replace with hi-res hero photos (gazebo / dock / hardwood) -->
     </div>
     <div class="scrim"></div>
@@ -1169,7 +1184,7 @@
     <div class="container">
       <div class="meet">
         <figure class="portrait">
-          <img src="images/portrait/ian-oray.webp" alt="Ian O'Ray, Design Build & Renovate" loading="lazy" />
+          <img src="images/portrait/ian-oray.webp" alt="Ian O'Ray, Design Build & Renovate" loading="lazy" width="960" height="958" />
           <!-- TODO_IAN: Replace with hi-res studio portrait -->
           <figcaption>
             <span class="l">Owner &amp; carpenter</span>
@@ -1245,7 +1260,7 @@
       <div class="work-grid">
         <figure class="tile-a">
           <a href="#" data-lightbox="images/projects/wood-flooring-drama-shot.webp" data-title="Wide-plank hardwood" data-meta="Flooring">
-            <img src="images/projects/wood-flooring-drama-shot.webp" alt="Wide-plank hardwood flooring with sun coming through" loading="lazy"/>
+            <img src="images/projects/wood-flooring-drama-shot.webp" alt="Wide-plank hardwood flooring with sun coming through" loading="lazy" width="1080" height="1350" />
             <!-- TODO_IAN: Replace with hi-res photo of hardwood drama shot -->
             <figcaption>
               <div class="meta"><span class="num">№ 01</span><span class="cat">Flooring</span></div>
@@ -1255,7 +1270,7 @@
         </figure>
         <figure class="tile-b">
           <a href="#" data-lightbox="images/projects/stairway-after.webp" data-title="Stair railing rebuild" data-meta="Finish & Trim">
-            <img src="images/projects/stairway-after.webp" alt="Refinished staircase with new dark treads and white risers" loading="lazy"/>
+            <img src="images/projects/stairway-after.webp" alt="Refinished staircase with new dark treads and white risers" loading="lazy" width="1080" height="1350" />
             <!-- TODO_IAN: Replace with hi-res photo of staircase millwork -->
             <figcaption>
               <div class="meta"><span class="num">№ 02</span><span class="cat">Finish &amp; Trim</span></div>
@@ -1265,7 +1280,7 @@
         </figure>
         <figure class="tile-c">
           <a href="#" data-lightbox="images/projects/tile-work-and-lit-cabinet.webp" data-title="Lit cabinetry & tile" data-meta="Kitchen & Bath">
-            <img src="images/projects/tile-work-and-lit-cabinet.webp" alt="Backlit display cabinet with tile work" loading="lazy"/>
+            <img src="images/projects/tile-work-and-lit-cabinet.webp" alt="Backlit display cabinet with tile work" loading="lazy" width="1440" height="1440" />
             <!-- TODO_IAN: Replace with hi-res photo of lit cabinet and tile -->
             <figcaption>
               <div class="meta"><span class="num">№ 03</span><span class="cat">Kitchen &amp; Bath</span></div>
@@ -1275,7 +1290,7 @@
         </figure>
         <figure class="tile-d">
           <a href="#" data-lightbox="images/projects/dock-in-progress-onto-boat.webp" data-title="Lake St. Clair dock" data-meta="Exterior">
-            <img src="images/projects/dock-in-progress-onto-boat.webp" alt="Custom-built dock extending out to a boat slip on Lake St. Clair" loading="lazy"/>
+            <img src="images/projects/dock-in-progress-onto-boat.webp" alt="Custom-built dock extending out to a boat slip on Lake St. Clair" loading="lazy" width="1080" height="1440" />
             <!-- TODO_IAN: Replace with hi-res photo of lakefront dock build -->
             <figcaption>
               <div class="meta"><span class="num">№ 04</span><span class="cat">Exterior</span></div>
@@ -1285,7 +1300,7 @@
         </figure>
         <figure class="tile-e">
           <a href="#" data-lightbox="images/projects/closet-system.webp" data-title="Closet system" data-meta="Millwork">
-            <img src="images/projects/closet-system.webp" alt="Custom closet shelving and hanging rods" loading="lazy"/>
+            <img src="images/projects/closet-system.webp" alt="Custom closet shelving and hanging rods" loading="lazy" width="1080" height="1350" />
             <!-- TODO_IAN: Replace with hi-res photo of closet system -->
             <figcaption>
               <div class="meta"><span class="num">№ 05</span><span class="cat">Millwork</span></div>
@@ -1295,7 +1310,7 @@
         </figure>
         <figure class="tile-f">
           <a href="#" data-lightbox="images/projects/bathroom-after.webp" data-title="Full bath remodel" data-meta="Kitchen & Bath">
-            <img src="images/projects/bathroom-after.webp" alt="Renovated bathroom with new tile and fixtures" loading="lazy"/>
+            <img src="images/projects/bathroom-after.webp" alt="Renovated bathroom with new tile and fixtures" loading="lazy" width="1080" height="801" />
             <!-- TODO_IAN: Replace with hi-res photo of finished bathroom -->
             <figcaption>
               <div class="meta"><span class="num">№ 06</span><span class="cat">Kitchen &amp; Bath</span></div>
@@ -1317,12 +1332,12 @@
         </div>
       </div>
       <div class="shop-strip">
-        <figure><img src="images/projects/patio-corner-joinery.jpg" alt="Cedar patio corner being assembled with biscuit joinery" loading="lazy"/></figure>
-        <figure><img src="images/projects/gazebo-pre-roof.jpg" alt="Gazebo framing before the roof goes on" loading="lazy"/></figure>
-        <figure><img src="images/projects/wood-flooring-process.jpg" alt="Hardwood flooring being laid" loading="lazy"/></figure>
-        <figure><img src="images/projects/dock-in-progress.jpg" alt="Dock build in progress on Lake St. Clair" loading="lazy"/></figure>
-        <figure><img src="images/projects/closet-system-closeup2.jpg" alt="Custom closet shelving close up" loading="lazy"/></figure>
-        <figure><img src="images/projects/patio-corner-glue.jpg" alt="Glue-up on a cedar patio corner" loading="lazy"/></figure>
+        <figure><img src="images/projects/patio-corner-joinery.jpg" alt="Cedar patio corner being assembled with biscuit joinery" loading="lazy" width="1080" height="1439" /></figure>
+        <figure><img src="images/projects/gazebo-pre-roof.jpg" alt="Gazebo framing before the roof goes on" loading="lazy" width="1080" height="810" /></figure>
+        <figure><img src="images/projects/wood-flooring-process.jpg" alt="Hardwood flooring being laid" loading="lazy" width="1080" height="1350" /></figure>
+        <figure><img src="images/projects/dock-in-progress.jpg" alt="Dock build in progress on Lake St. Clair" loading="lazy" width="1080" height="1440" /></figure>
+        <figure><img src="images/projects/closet-system-closeup2.jpg" alt="Custom closet shelving close up" loading="lazy" width="1080" height="1350" /></figure>
+        <figure><img src="images/projects/patio-corner-glue.jpg" alt="Glue-up on a cedar patio corner" loading="lazy" width="1080" height="1440" /></figure>
       </div>
       <!-- TODO_IAN: Replace with hi-res process photos -->
     </div>
@@ -1354,8 +1369,8 @@
             role="img"
             aria-label="Bathroom remodel — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/bathroom-before.webp" alt="Bathroom before remodel" loading="lazy" />
-            <img class="img-after"  src="images/projects/bathroom-after.webp"  alt="Bathroom after remodel" loading="lazy" />
+            <img class="img-before" src="images/projects/bathroom-before.webp" alt="Bathroom before remodel" loading="lazy" width="1080" height="801" />
+            <img class="img-after"  src="images/projects/bathroom-after.webp"  alt="Bathroom after remodel" loading="lazy" width="1080" height="801" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1377,8 +1392,8 @@
             role="img"
             aria-label="Stairway rebuild — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/stairway-before.webp" alt="Stairway before rebuild" loading="lazy" />
-            <img class="img-after"  src="images/projects/stairway-after.webp"  alt="Stairway after rebuild" loading="lazy" />
+            <img class="img-before" src="images/projects/stairway-before.webp" alt="Stairway before rebuild" loading="lazy" width="1080" height="1349" />
+            <img class="img-after"  src="images/projects/stairway-after.webp"  alt="Stairway after rebuild" loading="lazy" width="1080" height="1350" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1400,8 +1415,8 @@
             role="img"
             aria-label="Closet system — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/closet-system-before.webp" alt="Closet before build" loading="lazy" />
-            <img class="img-after"  src="images/projects/closet-system.webp"        alt="Closet after build" loading="lazy" />
+            <img class="img-before" src="images/projects/closet-system-before.webp" alt="Closet before build" loading="lazy" width="1080" height="1349" />
+            <img class="img-after"  src="images/projects/closet-system.webp"        alt="Closet after build" loading="lazy" width="1080" height="1350" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
@@ -1423,8 +1438,8 @@
             role="img"
             aria-label="Hardwood flooring — before and after, drag to compare"
           >
-            <img class="img-before" src="images/projects/wood-flooring-before.webp" alt="Wood flooring before refinishing" loading="lazy" />
-            <img class="img-after"  src="images/projects/wood-flooring-after.webp"  alt="Wood flooring after refinishing" loading="lazy" />
+            <img class="img-before" src="images/projects/wood-flooring-before.webp" alt="Wood flooring before refinishing" loading="lazy" width="1080" height="1350" />
+            <img class="img-after"  src="images/projects/wood-flooring-after.webp"  alt="Wood flooring after refinishing" loading="lazy" width="1080" height="1350" />
             <span class="label before">Before</span>
             <span class="label after">After</span>
             <div class="divider" aria-hidden="true"></div>
