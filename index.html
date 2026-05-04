@@ -1314,16 +1314,14 @@
     font-size: 1.4rem; font-weight: 700;
     box-shadow: 0 2px 12px rgba(0,0,0,0.4);
   }
-  .lightbox .lb-prev { left: -1.5rem; }
-  .lightbox .lb-next { right: -1.5rem; }
+  .lightbox .lb-prev { left: clamp(0.5rem, 2.5vw, 2rem); }
+  .lightbox .lb-next { right: clamp(0.5rem, 2.5vw, 2rem); }
   .lightbox .lb-close {
-    top: 0.5rem; right: 0.5rem; transform: none;
+    top: clamp(0.5rem, 2vw, 1.25rem);
+    right: clamp(0.5rem, 2vw, 1.25rem);
+    transform: none;
     width: 40px; height: 40px;
     font-size: 1.1rem;
-  }
-  @media (max-width: 720px) {
-    .lightbox .lb-prev { left: 0.25rem; }
-    .lightbox .lb-next { right: 0.25rem; }
   }
   body.lb-open { overflow: hidden; }
 </style>
